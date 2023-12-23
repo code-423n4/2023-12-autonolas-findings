@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Prevents issues caused by users supplying invalid indices or timestamps also Makes sure No future block numbers are queried and Ensures the timestamp is not in the future of the the wveOLAS contract",
+  "issueId": 13,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/13"
+}
