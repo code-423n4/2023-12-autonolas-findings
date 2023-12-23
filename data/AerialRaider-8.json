@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "3",
+  "title": "Protects against unauthorized manipulation of voting points and supply checkpoints in the veOLAS contract",
+  "issueId": 8,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/8"
+}
