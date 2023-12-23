@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "oreztker",
+  "risk": "2",
+  "title": "OpenZeppelin Governor v4.8.3 Front-Running DoS Vulnerability",
+  "issueId": 11,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/11"
+}
