@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Securing against uncontrolled inflation attacks where an attacker with minter privileges could devalue the token by minting excessive amounts in the OLAS contract",
+  "issueId": 10,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/10"
+}
