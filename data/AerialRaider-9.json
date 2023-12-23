@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Ensuring targets, values, and calldatas arrays are of equal length in the GovernorOLAS contract",
+  "issueId": 9,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/9"
+}
