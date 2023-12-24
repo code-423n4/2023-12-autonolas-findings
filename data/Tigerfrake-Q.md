@@ -67,3 +67,24 @@ Lack of zero-address validation on address parameters may lead to transaction re
 
 ### Recommendation
 > Consider adding explicit zero-address validation on input parameters of address type.
+
+# [06] Possibility of long-term suspension in `GuardCM` contract.
+
+### Description:
+If the pause feature is not designed with a mechanism to resume normal operation, it could potentially remain paused indefinitely.
+```Solidity
+function pause() external {
+  // ...
+}
+
+function unpause() external {
+  // ...
+}
+```
+Here, once the contract is `paused`, there's no guarantee it will ever be `unpaused`. If the `unpause()` function is not called, the contract remains `paused`.
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2Fmultisigs%2FGuardCM.sol#L539-L569
+
+### Recommendation:
+> It's recommended to use established patterns or libraries, such as OpenZeppelin's Pausable contract, which have been vetted by the community
