@@ -51,3 +51,14 @@ If a function has both `override` and `virtual` specifiers, it implies a contrad
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L761
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L767
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L772
+
+# [05] Missing Zero- address Validation
+
+### Description:
+Lack of zero-address validation on address parameters may lead to transaction reverts, waste gas, require resubmission of transactions and may even force contract redeployments in certain cases within the protocol.
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L155-L157
+
+### Recommendation
+> Consider adding explicit zero-address validation on input parameters of address type.
