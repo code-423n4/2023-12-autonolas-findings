@@ -27,7 +27,12 @@ In order to prevent the role from mistakenly being transferred to an address tha
 # [03] Potential Misleading Information Due to Unconditional Return Value in `DecreaseAllowance()` Function
 
 ### Description:
-The `decreaseAllowance()` function  doesn't inherently check whether the transaction is successful as per the comment by @auther. It performs the operation of reducing the allowance of a spender and returns `true` regardless of whether the operation was successful or not.
+The `decreaseAllowance()` function  doesn't inherently check whether the transaction is successful as per the comment by @auther. 
+```Solidity
+/// @return True if operation succeeded. 
+```
+
+It performs the operation of reducing the allowance of a spender and returns `true` regardless of whether the operation was successful or not.
 
 ### Impact:
 As for the impact on listeners that depend on the emitted `Approval` event, this can potentially lead to misleading information. Listeners that rely on the `Approval` event might interpret the event as a confirmation that the decrease in allowance was successful, even if it wasn't. This could lead to incorrect assumptions and behaviors in the rest of the application or in other parts of the smart contract.
