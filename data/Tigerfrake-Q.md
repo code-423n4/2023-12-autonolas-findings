@@ -8,7 +8,7 @@ In Solidity, constant variables should be named using all capital letters with u
 uint8 constant public MAX_BLOCKS = 100;
 
 ```
-### Contexts:
+### Instances:
 This is violated in the following contexts.
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L22-L26
 
@@ -19,7 +19,18 @@ The `OLAS` contract has a very important `Minter` role which can be changed via 
 
 In order to prevent the role from mistakenly being transferred to an address that cannot handle it (e.g. due to a typo in the address), require that the recipient of the new `minter` or `owner` role actively accepts via a `contract call` of its own.
 
-### Contexts:
+### Instances:
 
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L43-L69
 
+
+# [03] Potential Misleading Information Due to Unconditional Return Value in `DecreaseAllowance()` Function
+
+### Description:
+The `decreaseAllowance()` function  doesn't inherently check whether the transaction is successful. It performs the operation of reducing the allowance of a spender and returns `true` regardless of whether the operation was successful or not.
+
+### Impact:
+As for the impact on listeners that depend on the emitted `Approval` event, this can potentially lead to misleading information. Listeners that rely on the `Approval` event might interpret the event as a confirmation that the decrease in allowance was successful, even if it wasn't. This could lead to incorrect assumptions and behaviors in the rest of the application or in other parts of the smart contract.
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L128-L138
