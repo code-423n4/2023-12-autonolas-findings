@@ -34,3 +34,20 @@ As for the impact on listeners that depend on the emitted `Approval` event, this
 
 ### Instances:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L128-L138
+
+# [04] Contradictory Use of `Override` and `Virtual` Keywords in Function Specifier
+
+### Description:
+In Solidity, a function cannot have both virtual and override specifiers at the same time. They serve different purposes and are used in different scenarios:
+
+The `virtual` keyword is used in the base contract to indicate that a function can be overridden by derived contracts. If a function is marked as virtual, it means that the function's behavior can be changed in derived contracts.
+
+The `override` keyword is used in the derived contract to indicate that the function is intended to override a function in the base contract. 
+
+### Impact:
+If a function has both `override` and `virtual` specifiers, it implies a contradiction: the function is both overriding a function in a base contract and allowing itself to be overridden by derived contracts. This contradictory behavior is not allowed in Solidity, and the compiler will throw an error.
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L761
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L767
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L772
