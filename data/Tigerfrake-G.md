@@ -15,3 +15,6 @@ This [issue](https://github.com/code-423n4/2022-01-xdefi-findings/issues/128)  d
 
 ### Instance:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L188
+
+### Recommendation:
+> Using double `if/require` checks can save more gas:
