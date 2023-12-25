@@ -7,6 +7,7 @@ Saves 13 GAS
 
 ### Instances:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L131
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/registries%2Fcontracts%2FUnitRegistry.sol#L232
 
 # [G-02] Splitting `require()/if()` statements that use && saves gas. 
 
