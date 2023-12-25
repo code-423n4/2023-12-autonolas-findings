@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Tigerfrake",
+  "risk": "2",
+  "title": "Possible DoS Vulnerability Due to Missing Pause Condition in UpdateHash Function",
+  "issueId": 18,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/18"
+}
