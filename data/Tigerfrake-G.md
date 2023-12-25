@@ -37,4 +37,13 @@ for (uint i = 0; i < targets.length; ++i) {
 ### Recommendation:
 ‍Instead of looping over an array until you locate the key you need, use mappings, which are hash tables that enable you to retrieve any value using its key in a single action.
 
+# [G-04] Explicit zero_check for `amount` parameter in deposit function saves gas.
 
+### Description:
+If a user calls the function with a `zero-amount` parameter, the function will still execute, consuming gas. However, since no action is performed `(since the amount is zero)`, this execution is unnecessary and could lead to wasted gas. This is evident in the line `IERC20(token).transferFrom(msg.sender, address(this), amount)`; where the function attempts to transfer tokens even if the `amount is zero`.
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L330-L369
+
+### Recommendation:
+> It's generally a good practice to include a require statement at the beginning of your function to ensure that the amount sent is not zero
