@@ -20,20 +20,17 @@ This [issue](https://github.com/code-423n4/2022-01-xdefi-findings/issues/128)  d
 ### Recommendation:
 > Using double `if/require` checks can save more gas
 
-# [G-03] Avoid looping through lengthy arrays; 
+# [G-03] Using `mappings` instead of `arrays` saves gas; 
 
 ### Description:
-Not only will it consume a lot of gas, but if gas prices rise too much, it can even prevent your contract from being carried out beyond the block gas limit.
+Not only will arrays consume a lot of gas, but if gas prices rise too much, it can even prevent your contract from being carried out beyond the block gas limit.
 
 ```Solidity
 address[] memory targets;
-
-for (uint i = 0; i < targets.length; ++i) {
 ```
 
 ### Instances:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2Fmultisigs%2FGuardCM.sol#L345
-- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2Fmultisigs%2FGuardCM.sol#L360
 
 ### Recommendation:
 ‍Instead of looping over an array until you locate the key you need, use mappings, which are hash tables that enable you to retrieve any value using its key in a single action.
@@ -48,3 +45,13 @@ If a user calls the function with a `zero-amount` parameter, the function will s
 
 ### Recommendation:
 > It's generally a good practice to include a require statement at the beginning of your function to ensure that the amount sent is not zero
+
+# [G-05] Caching Array lengths in for-loops saves GAS.
+
+### Description:
+Caching the length of an array in a for loop can save gas because reading the array length at each iteration of the loop requires additional computational resources.
+
+For memory arrays, an extra mload operation is performed, adding 3 extra gas for each iteration therfore caching it will save 3 GAS.
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/tokenomics%2Fcontracts%2FDepository.sol#L356-L357
