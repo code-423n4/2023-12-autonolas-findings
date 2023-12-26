@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ayden",
+  "risk": "3",
+  "title": "malicious user can initiate a lock for a specific address and extend the lock duration by up to 4 years",
+  "issueId": 20,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/20"
+}
