@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "debo",
+  "risk": "2",
+  "title": "[H-01] Cross function reentrancy in the Depository contract within close function ",
+  "issueId": 24,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/24"
+}
