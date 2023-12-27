@@ -12,19 +12,8 @@ uint8 constant public MAX_BLOCKS = 100;
 This is violated in the following contexts.
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L22-L26
 
-# [02] Use a two-step transfer function for the Owner and Minter roles in OLAS contract. 
 
-### Description:
-The `OLAS` contract has a very important `Minter` role which can be changed via a `changeMinter()` function and `Owner` role that can be changed via `changeOwner()` function.
-
-In order to prevent the role from mistakenly being transferred to an address that cannot handle it (e.g. due to a typo in the address), require that the recipient of the new `minter` or `owner` role actively accepts via a `contract call` of its own.
-
-### Instances:
-
-- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L43-L69
-
-
-# [03] Potential Misleading Information Due to Unconditional Return Value in `DecreaseAllowance()` Function
+# [02] Potential Misleading Information Due to Unconditional Return Value in `DecreaseAllowance()` Function
 
 ### Description:
 The `decreaseAllowance()` function  doesn't inherently check whether the transaction is successful as per the comment by @auther. 
@@ -40,7 +29,7 @@ As for the impact on listeners that depend on the emitted `Approval` event, this
 ### Instances:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FOLAS.sol#L128-L138
 
-# [04] Contradictory Use of `Override` and `Virtual` Keywords in Function Specifier
+# [03] Contradictory Use of `Override` and `Virtual` Keywords in Function Specifier
 
 ### Description:
 In Solidity, a function cannot have both virtual and override specifiers at the same time. They serve different purposes and are used in different scenarios:
@@ -57,7 +46,7 @@ If a function has both `override` and `virtual` specifiers, it implies a contrad
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L767
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L772
 
-# [05] Missing Zero- address Validation
+# [04] Missing Zero- address Validation
 
 ### Description:
 Lack of zero-address validation on address parameters may lead to transaction reverts, waste gas, require resubmission of transactions and may even force contract redeployments in certain cases within the protocol.
@@ -68,7 +57,7 @@ Lack of zero-address validation on address parameters may lead to transaction re
 ### Recommendation
 > Consider adding explicit zero-address validation on input parameters of address type.
 
-# [06] Possibility of long-term suspension in `GuardCM` contract.
+# [05] Possibility of long-term suspension in `GuardCM` contract.
 
 ### Description:
 If the pause feature is not designed with a mechanism to resume normal operation, it could potentially remain paused indefinitely.
