@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Krace",
+  "risk": "2",
+  "title": "Users may lose funds due to precision loss in `Depository.deposit`",
+  "issueId": 25,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/25"
+}
