@@ -77,3 +77,31 @@ Here, once the contract is `paused`, there's no guarantee it will ever be `unpau
 
 ### Recommendation:
 > It's recommended to use established patterns or libraries, such as OpenZeppelin's Pausable contract, which have been vetted by the community
+
+# [06] Floating pragma
+
+#### Description:
+The disadvantage of using a floating pragma is that it can lead to inconsistencies and potential bugs. When a contract is compiled with a different compiler version, it might produce different bytecode due to changes in the compiler, even if the source code looks the same. This can lead to unexpected behavior if the contract is deployed on a network with a different compiler version than the one it was tested with.
+
+```Solidity
+pragma solidity ^0.4.0;
+
+contract PragmaNotLocked {
+   uint public x = 1;
+}
+```
+Moreover, if the contract uses features that were introduced in a newer compiler version, and it gets compiled with an older compiler version, it could fail or behave differently than expected.
+
+#### Instances:
+- All files
+
+#### Recommendation:
+> It's generally recommended to lock the compiler version to avoid these issues.
+```Solidity
+pragma solidity 0.4.25;
+
+contract PragmaFixed {
+   uint public x = 1;
+}
+```
+
