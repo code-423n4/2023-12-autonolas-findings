@@ -55,3 +55,26 @@ For memory arrays, an extra mload operation is performed, adding 3 extra gas for
 
 ### Instances:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/tokenomics%2Fcontracts%2FDepository.sol#L356-L357
+
+# [G-06] Declare variables outside the loop
+Per iteration, saves 26 gas.
+
+### Description:
+Declaring variables outside a for loop helps save on gas costs because the variable does not need to be reallocated in each iteration of the loop, which can save computational resources and therefore reduce the gas cost.
+
+Example:
+```Solidity
+contract Test {
+   function testOutsideLoop() public {
+       uint myNumber;
+       for (uint i=0; i<10; i++) {
+           myNumber = i*i;
+       }
+   }
+}
+```
+### Instance:
+This is violated in this context:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L561-L565
+
+Where `uint256` mid is defined within the for-loop. 
