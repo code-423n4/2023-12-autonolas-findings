@@ -77,4 +77,23 @@ contract Test {
 This is violated in this context:
 - https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L561-L565
 
-Where `uint256` mid is defined within the for-loop. 
+Where `uint256` mid is defined within the for-loop.
+
+
+# [G-07] Use `! = 0` instead of `>0` for unsigned integer comparison.
+
+###Description:
+In Solidity, using `!= 0` instead of `> 0` in integer comparisons can be more gas-efficient. This is because the `!=` operator checks if a value is non-zero by simply checking the zero flag, which is more efficient in terms of gas cost compared to checking if a value is greater than zero using `>` 
+
+When a comparison operator is used on `uint256` values, it requires the `Ethereum Virtual Machine (EVM)` to perform a subtraction operation between the two values, which takes up more gas than a simple check for equality. 
+For example, if you want to check if a number is `greater than zero`, the `EVM` must subtract one from the number and compare the result to zero. This operation takes more computational resources and therefore consumes more gas than simply checking if the number is not equal to zero. 
+
+### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L663
+
+### Recommendation:
+Change the condition in this manner:
+```Solidity
+if(dBlock ! =0) {
+```
+
