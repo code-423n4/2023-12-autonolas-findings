@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "nmirchev8",
+  "risk": "2",
+  "title": "Malicious veOLAS holder can front-run any healthy proposal, wait pending proposal and then cancel it, preventing community wanted changes from being proposed",
+  "issueId": 36,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/36"
+}
