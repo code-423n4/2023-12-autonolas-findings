@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "DanielTan_MetaTrust",
+  "risk": "2",
+  "title": "Incompatability with fee-on-transfer tokens",
+  "issueId": 26,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/26"
+}
