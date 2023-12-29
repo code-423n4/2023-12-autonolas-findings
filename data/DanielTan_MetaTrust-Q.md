@@ -1,5 +1,5 @@
 # `changeOwner` and `changeMinter` should be two steps process
-
+## Description
 The `OLAS` contract enables the `owner` role to change the `owner` to another address. It’s possible that the `owner` role mistakenly transfers ownership to the wrong address, resulting in a loss of the `owner` role. The current ownership transfer process involves the current owner calling OLAS.changeOwner(). This function validates the new owner is not the zero address and proceeds to write the new owner’s address into the owner’s state variable. If the nominated EOA account is invalid, the owner may accidentally transfer ownership to an uncontrolled account, breaking all functions with the `owner` check.
 
 A similar scenario happens to the `OLAS.changeMinter` function for the `minter` role.
@@ -13,3 +13,14 @@ A similar scenario happens to the `OLAS.changeMinter` function for the `minter` 
 
 ## Recommended Mitigation Steps
 Consider implementing a two-step process where the owner nominates an owner or minter and the nominated account needs to call an acceptOwnership() function or acceptMinter() function for the transfer of ownership or minter to fully succeed. This ensures the nominated EOA account is valid and active.
+
+
+# Potential name/symbol conflict
+
+## Description
+The contract `wveOLAS` has the name `voting Escrow OLAS` and symbol as `veOLAS`, instead of `wrapper voting Escrow OLAS` and `wveOLAS`.
+
+There is another contract `veOLAS`, which will be assigned name and symbol at the runtime. Its name and symbol would probably be `voting Escrow OLAS` and `veOLAS` if it follows the naming tradition, which will incur the name and symbol conflict between the `wveOLAS` contract and the `veOLAS` contract.
+
+## Recommendation
+Recommend naming the `wveOLAS` contract's name and symbol as `wrapper voting Escrow OLAS` and `wveOLAS`.
