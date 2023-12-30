@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Manax",
+  "risk": "3",
+  "title": "Missing Access Control in changeOwner() function",
+  "issueId": 48,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/48"
+}
