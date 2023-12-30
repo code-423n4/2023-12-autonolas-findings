@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Newtonboy",
+  "risk": "2",
+  "title": "In the Function getBonds there's a missing return statement at the end of the function. To ensure the function returns the expected values (bondIds and payout), add a return statement at the end of the function",
+  "issueId": 47,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/47"
+}
