@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "In case if epoch length will be set to 1 year then it will likely not be finalized",
+  "issueId": 57,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/57"
+}
