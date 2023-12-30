@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Walter",
+  "risk": "2",
+  "title": "GenericRegistry.tokenURI does not comply with ERC721 - Metada specification",
+  "issueId": 60,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/60"
+}
