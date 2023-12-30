@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Walter",
+  "risk": "2",
+  "title": "Lack of slippage control when querying price from UniswapV2",
+  "issueId": 61,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/61"
+}
