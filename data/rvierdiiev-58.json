@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "checkpoint function will calculate wrong values as component and agent top ups incentives in case if inflation year changes",
+  "issueId": 58,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/58"
+}
