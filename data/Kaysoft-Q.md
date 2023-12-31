@@ -1,4 +1,4 @@
-## Security vulnerability with `GovernorCompatibilityBravo` version 4.8.3
+## [L-1] Security vulnerability with `GovernorCompatibilityBravo` version 4.8.3
 
 There is 1 instance of this
 - https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/GovernorOLAS.sol#L15
@@ -13,7 +13,7 @@ contract GovernorOLAS is Governor, GovernorSettings, GovernorCompatibilityBravo,
 Due to the order of the parent contracts and how Solidity inheritance work, the `super` keyword in the `propose(...)` function below invokes the vulnerable  `GovernorCompatibilityBravo.propose(...)` function.
 
 ```
-File: GovernorOLAS.sol
+File: governance/contracts/GovernorOLAS.sol
 45: function propose(
 46:        address[] memory targets,
 47:        uint256[] memory values,
@@ -29,4 +29,103 @@ File: GovernorOLAS.sol
 
 #### Recommendation: Consider updating the openzeppelin library to version 4.9.3.
 
+## [L-2] Avoid variable shadowing.
+There is 1 instance of this.
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/ComponentRegistry.sol#L20
 
+Constructor parameter `ComponentRegistry#constructor._baseURI` shadows the parent's `ERC721._baseURI` storage variable. Variable shadowing can easily lead to a security issue when one of the two variables is referenced instead of the other.
+
+```
+File: registry/contracts/ComponentRegistry.sol
+16:constructor(string memory _name, string memory _symbol, string memory _baseURI)
+17:        UnitRegistry(UnitType.Component)
+18:        ERC721(_name, _symbol)
+19:    {
+20:        baseURI = _baseURI;//@audit-info variable shadowing ERC721._baseURI
+21:        owner = msg.sender;
+22:    }
+``` 
+
+see SWC-119 here: https://swcregistry.io/docs/SWC-119/
+
+#### Recommendation: Consider renaming the `ComponentRegistry#constructor._baseURI` constructor parameter.
+
+## [L-3] Use already existing Openzeppelin libraries where possible.
+open source libraries like OZ have undergone several security audits, have stood the test of time, have been battle tested so it is safer to use these libraries that also reduce development time and also makes the code modular.
+
+1. Use Openzeppelin's Ownable2step  library instead of creating another ownable implementation and duplicating it in most contracts.
+
+There are 4 instances of this
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/bridges/BridgedERC20.sol#L25C4-L44C1
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/OLAS.sol#L36C9-L54C6
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/GenericManager.sol#L14C5-L34C1
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/GenericRegistry.sol#L37C5-L51C1
+
+2. Use Openzeppelin Pausable library instead of creating an implementation that can be prone to error.
+
+There are 2 instancees of this:
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/GenericManager.sol#L36C5-L55C6
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Treasury.sol#L531C5-L550C6
+
+3. Use Openzeppelin's ReentrancyGuard library instead of creating an implementation that can be prone to error.
+
+There are 3 instances of this:
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/audits/internal/analysis/reentrancyPoC/ServiceRegistry.sol#L613C8-L617C21
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Dispenser.sol#L92C9-L96C21
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Treasury.sol#L258C9-L262C21
+
+4. Use Openzepelin's ERC721Enumerable the implemented on in this project is incorrect.
+
+The GenericRegistry ERC721 contract implements the `tokenByIndex(...)` function which is an ERC721Enumerable feature. Consider using Openzeppelin's ERC721Enumerable to avoid potential issues.
+
+There is 1 instance of this:
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/GenericRegistry.sol#L97C5-L102C6
+
+
+## [L-4] USE THE RIGHT ERROR NAME
+There is 1 instances of this:
+
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/GenericRegistry.sol#L100
+
+The errorname used in the if condition below is wrong. it should be something like "Unavailable" or "NotFound".
+
+```
+File: registries/contracts/GenericRegistry.sol
+97: function tokenByIndex(uint256 id) external view virtual returns (uint256 unitId) {
+98:        unitId = id + 1;
+99:        if (unitId > totalSupply) {
+100:            revert Overflow(unitId, totalSupply);//@audit this is not overflow error
+101:        }
+    }
+```
+
+#### Recommendation: use an error name that reflects the condition that happened in the function.
+
+## [L-5] UNNECESSARY STORAGE VARIABLE UPDATE.
+There is 1 instance of this
+
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L291
+
+Since the `_locked` storage variable is used for reentrancy guard, there is no need setting the value of `_locked` in the initialize function of the Tokenomics function.
+
+```
+291: function initializeTokenomics(
+292:        address _olas,
+293:        address _treasury,
+294:        address _depository,
+295:        address _dispenser,
+296:        address _ve,
+297:        uint256 _epochLen,
+298:        address _componentRegistry,
+299:        address _agentRegistry,
+300:        address _serviceRegistry,
+301:        address _donatorBlacklist
+302:     ) external
+303:    {
+...
+264: _locked = 1;//@audit unnecessary state update since there is no reentrance risk in initialze function.
+...
+370: }
+
+```
+#### Recommendation: remove `_locked` state update above.
