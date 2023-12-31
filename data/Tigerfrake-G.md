@@ -46,17 +46,8 @@ If a user calls the function with a `zero-amount` parameter, the function will s
 ### Recommendation:
 > It's generally a good practice to include a require statement at the beginning of your function to ensure that the amount sent is not zero
 
-# [G-05] Caching Array lengths in for-loops saves GAS.
 
-### Description:
-Caching the length of an array in a for loop can save gas because reading the array length at each iteration of the loop requires additional computational resources.
-
-For memory arrays, an extra mload operation is performed, adding 3 extra gas for each iteration therfore caching it will save 3 GAS.
-
-### Instances:
-- https://github.com/code-423n4/2023-12-autonolas/blob/main/tokenomics%2Fcontracts%2FDepository.sol#L356-L357
-
-# [G-06] Declare variables outside the loop
+# [G-05] Declare variables outside the loop
 Per iteration, saves 26 gas.
 
 ### Description:
@@ -79,21 +70,4 @@ This is violated in this context:
 
 Where `uint256` mid is defined within the for-loop.
 
-
-# [G-07] Use `! = 0` instead of `>0` for unsigned integer comparison.
-
-###Description:
-In Solidity, using `!= 0` instead of `> 0` in integer comparisons can be more gas-efficient. This is because the `!=` operator checks if a value is non-zero by simply checking the zero flag, which is more efficient in terms of gas cost compared to checking if a value is greater than zero using `>` 
-
-When a comparison operator is used on `uint256` values, it requires the `Ethereum Virtual Machine (EVM)` to perform a subtraction operation between the two values, which takes up more gas than a simple check for equality. 
-For example, if you want to check if a number is `greater than zero`, the `EVM` must subtract one from the number and compare the result to zero. This operation takes more computational resources and therefore consumes more gas than simply checking if the number is not equal to zero. 
-
-### Instances:
-- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L663
-
-### Recommendation:
-Change the condition in this manner:
-```Solidity
-if(dBlock ! =0) {
-```
 
