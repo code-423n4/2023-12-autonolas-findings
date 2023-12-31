@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Walter",
+  "risk": "2",
+  "title": "Unhandled Revert Bug in GenericRegistry's tokenByIndex Function",
+  "issueId": 68,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/68"
+}
