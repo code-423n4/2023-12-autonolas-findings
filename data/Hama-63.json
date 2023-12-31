@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Hama",
+  "risk": "2",
+  "title": "Missing Slippage Protection in Deposit and Redeem",
+  "issueId": 63,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/63"
+}
