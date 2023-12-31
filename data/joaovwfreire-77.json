@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "joaovwfreire",
+  "risk": "2",
+  "title": "veOLAS:createLockFor can be front-run by a malicious party ",
+  "issueId": 77,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/77"
+}
