@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "joaovwfreire",
+  "risk": "2",
+  "title": "GuardCM:_verifyBridgedData does not skip data variable initial 12 bytes used for encoding on inline assembly",
+  "issueId": 80,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/80"
+}
