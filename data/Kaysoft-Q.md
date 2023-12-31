@@ -24,10 +24,10 @@ File: governance/contracts/GovernorOLAS.sol
 52:        return super.propose(targets, values, calldatas, description);
 53:    }
 ```
-#### References 
+ References 
 - https://github.com/OpenZeppelin/openzeppelin-contracts/security/advisories/GHSA-5h3x-9wvq-w4m2
 
-#### Recommendation: Consider updating the openzeppelin library to version 4.9.3.
+ Recommendation: Consider updating the openzeppelin library to version 4.9.3.
 
 ## [L-2] Avoid variable shadowing.
 There is 1 instance of this.
@@ -48,7 +48,7 @@ File: registry/contracts/ComponentRegistry.sol
 
 see SWC-119 here: https://swcregistry.io/docs/SWC-119/
 
-#### Recommendation: Consider renaming the `ComponentRegistry#constructor._baseURI` constructor parameter.
+ Recommendation: Consider renaming the `ComponentRegistry#constructor._baseURI` constructor parameter.
 
 ## [L-3] Use already existing Openzeppelin libraries where possible.
 open source libraries like OZ have undergone several security audits, have stood the test of time, have been battle tested so it is safer to use these libraries that also reduce development time and also makes the code modular.
@@ -99,7 +99,7 @@ File: registries/contracts/GenericRegistry.sol
     }
 ```
 
-#### Recommendation: use an error name that reflects the condition that happened in the function.
+Recommendation: use an error name that reflects the condition that happened in the function.
 
 ## [L-5] UNNECESSARY STORAGE VARIABLE UPDATE.
 There is 1 instance of this
@@ -128,4 +128,62 @@ Since the `_locked` storage variable is used for reentrancy guard, there is no n
 370: }
 
 ```
-#### Recommendation: remove `_locked` state update above.
+Recommendation: remove `_locked` state update above.
+
+## [L-6] Tokenomics.sol implementation contract can be initialized
+There is 1 instance:
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L264C5-L370C6
+
+The Tokenomics.sol contract is the implementation contract for the TokenomicsProxy.sol proxy contract. The `TokenomicsProxy.sol` is expected to call the initialize function of its `Tokenomic.sol` implementation through a delegate call. 
+In a situation where the `Tokenomics.sol` implementation contract is not separately initialized, anyone can initialize the `Tokenomics.sol` implementation contract which could lead to potential security issue for the proxy contract for example if an implementation contract can be taken over and destroyed.
+
+```
+File: tokenomics/contracts/Tokenomics.sol
+264: function initializeTokenomics(
+265:        address _olas,
+266:        address _treasury,
+267:        address _depository,
+268:        address _dispenser,
+269:        address _ve,
+270:        uint256 _epochLen,
+271:        address _componentRegistry,
+272:        address _agentRegistry,
+273:        address _serviceRegistry,
+274:        address _donatorBlacklist
+275:    ) external
+276:    {
+277:        // Check if the contract is already initialized
+278:        if (owner != address(0)) {
+279:            revert AlreadyInitialized();
+280:        }
+281:
+282:        // Check for at least one zero contract address
+283:        if (_olas == address(0) || _treasury == address(0) || _depository == address(0) || _dispenser == address(0) ||
+284:            _ve == address(0) || _componentRegistry == address(0) || _agentRegistry == address(0) ||
+285:            _serviceRegistry == address(0)) {
+286:            revert ZeroAddress();
+287:        }
+...
+370:}
+
+```
+
+Recommendation : Use Openzepelin's initializable library, initializable modifier on the `Tokenomics.sol#initialize(...)` founction and it's `_disableInitializers()` function in the constructor of the `Tokenomics.sol` implementation contract as below.
+
+```
+import { Initializable} from "OpenZeppelin/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol";
+
+Tokenomics is Initializable {
+
+/// @custom:oz-upgrades-unsafe-allow constructor
+ * constructor() {
+ *     _disableInitializers();
+ * }
+
+function initialize(...) initializer public {
+
+...
+}
+...
+}
+```
