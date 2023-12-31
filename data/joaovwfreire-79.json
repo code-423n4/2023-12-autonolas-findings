@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "joaovwfreire",
+  "risk": "2",
+  "title": "OLAS:inflationRemainder assumes the first 10 years have a static supplyCap",
+  "issueId": 79,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/79"
+}
