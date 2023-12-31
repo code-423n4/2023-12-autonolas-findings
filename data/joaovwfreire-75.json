@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "joaovwfreire",
+  "risk": "2",
+  "title": "Tokenomics:checkpoint deflates inflation per epoch if called after the epoch's precise end time",
+  "issueId": 75,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/75"
+}
