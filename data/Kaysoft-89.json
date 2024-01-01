@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Kaysoft",
+  "risk": "3",
+  "title": "BridgedERC20 can not be transfered back to L1 ",
+  "issueId": 89,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/89"
+}
