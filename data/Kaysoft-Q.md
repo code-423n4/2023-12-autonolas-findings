@@ -30,10 +30,12 @@ File: governance/contracts/GovernorOLAS.sol
  Recommendation: Consider updating the openzeppelin library to version 4.9.3.
 
 ## [L-2] Avoid variable shadowing.
-There is 1 instance of this.
+There are 3 instances of this.
 - https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/ComponentRegistry.sol#L20
 
-Constructor parameter `ComponentRegistry#constructor._baseURI` shadows the parent's `ERC721._baseURI` storage variable. Variable shadowing can easily lead to a security issue when one of the two variables is referenced instead of the other.
+- https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/GovernorOLAS.sol#L18
+
+1. Constructor parameter `ComponentRegistry#constructor._baseURI` shadows the parent's `ERC721._baseURI` storage variable. Variable shadowing can easily lead to a security issue when one of the two variables is referenced instead of the other.
 
 ```
 File: registry/contracts/ComponentRegistry.sol
@@ -45,6 +47,7 @@ File: registry/contracts/ComponentRegistry.sol
 21:        owner = msg.sender;
 22:    }
 ``` 
+2. The `timelock` parameter of `GovernorOLAS.sol#constructor(...)` shadows `IGovernorTimelock.timelock`.
 
 see SWC-119 here: https://swcregistry.io/docs/SWC-119/
 
@@ -187,3 +190,4 @@ function initialize(...) initializer public {
 ...
 }
 ```
+
