@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Kaysoft",
+  "risk": "2",
+  "title": "component / agent hash can be updated when RegistriesManager.sol is paused",
+  "issueId": 86,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/86"
+}
