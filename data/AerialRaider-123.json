@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Input validation checks in the create and deposit functions for the Depository contract",
+  "issueId": 123,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/123"
+}
