@@ -1,0 +1,2 @@
+ Lack of Zero Address Check in BondCalculator Interaction
+[Link](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L491-L494)
