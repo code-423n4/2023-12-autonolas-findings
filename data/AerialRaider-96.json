@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "For sensitive functions like changeGovernor, setTargetSelectorChainIds, setBridgeMediatorChainIds, pause, and unpause, ensure that only the contract owner or other authorized entities can execute these functions",
+  "issueId": 96,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/96"
+}
