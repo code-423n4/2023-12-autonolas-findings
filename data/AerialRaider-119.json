@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Security checks for data length in _parseData and input validation in create functions in the GnosisSafeMultisig contract",
+  "issueId": 119,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/119"
+}
