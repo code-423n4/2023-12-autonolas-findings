@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xfave",
+  "risk": "2",
+  "title": "Depository.sol#redeem - will use stale `priceLp`",
+  "issueId": 104,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/104"
+}
