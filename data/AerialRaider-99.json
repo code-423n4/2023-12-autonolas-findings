@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Implementing suggested security checks for _checkpointManager, _fxRoot, _childToken, and _rootToken Functions  withdraw and withdrawTo functions for the FxERC20RootTunnel contract  the ",
+  "issueId": 99,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/99"
+}
