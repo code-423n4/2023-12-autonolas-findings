@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ziyou-",
+  "risk": "2",
+  "title": "The constants MAXTIME and IMAXTIME are calculated incorrectly",
+  "issueId": 100,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/100"
+}
