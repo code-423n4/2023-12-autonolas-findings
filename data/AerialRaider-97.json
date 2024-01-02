@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Ensuring that the cross-chain interactions and function scheduling are executed with higher security and reliability for _processBridgeData and _verifySchedule functions",
+  "issueId": 97,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/97"
+}
