@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Appling the OwnerOnly Modifier to changeOwner, changeManagers, changeBondCalculator, create, and close functions in the Depository contract",
+  "issueId": 125,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/125"
+}
