@@ -144,6 +144,163 @@ FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
 ```
 https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L856-L858
 
+##
+
+## [G-5] ``lastPointNumber - 1`` subtraction can be unchecked 
+
+Using unchecked for lastPointNumber - 1 is a good optimization to reduce gas costs. Since already checked that lastPointNumber > 0, the subtraction will not underflow.
+
+```diff
+FILE: Breadcrumbs2023-12-autonolas/governance/contracts/veOLAS.sol
+
+uint256 lastPointNumber = mapUserPoints[account].length;
+        if (lastPointNumber > 0) {
++     unchecked {
+            pv = mapUserPoints[account][lastPointNumber - 1];
++               }
+        }
+
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/veOLAS.sol#L148
+
+##
+
+## [G-7] Don't cache external calls only used once 
+
+```diff
+FILE: 2023-12-autonolas/governance/contracts/veOLAS.sol
+
+ function getUserPoint(address account, uint256 idx) public view returns (PointVoting memory uPoint) {
+        // Get the number of user points
+-        uint256 userNumPoints = IVEOLAS(ve).getNumUserPoints(account);
+-        if (userNumPoints > 0) {
++        if (IVEOLAS(ve).getNumUserPoints(account) > 0) {
+            uPoint = IVEOLAS(ve).getUserPoint(account, idx);
+        }
+    }
+
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L193-L199
+
+##
+
+## [G-8] Use assembly for back to back external calls 
+
+Using inline assembly in Solidity for back-to-back external calls can indeed optimize gas usage, particularly by reducing the overhead associated with these calls.
+
+```solidity
+FILE: 2023-12-autonolas/governance/contracts/wveOLAS.sol
+
+ // Get the total number of supply points
+        uint256 numPoints = IVEOLAS(ve).totalNumPoints();
+        PointVoting memory sPoint = IVEOLAS(ve).mapSupplyPoints(numPoints);
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L264-L266
+
+##
+
+## [G-9] Optimize the _verifyData() function for better gas efficiency 
+
+#### Original Code 
+
+```solidity
+FILE: 2023-12-autonolas/governance/contracts/multisigs/GuardCM.sol
+
+function _verifyData(address target, bytes memory data, uint256 chainId) internal {
+        // Push a pair of key defining variables into one key
+        // target occupies first 160 bits
+        uint256 targetSelectorChainId = uint256(uint160(target));
+        // selector occupies next 32 bits
+        targetSelectorChainId |= uint256(uint32(bytes4(data))) << 160;
+        // chainId occupies next 64 bits
+        targetSelectorChainId |= chainId << 192;
+
+        // Check the authorized combination of target and selector
+        if (!mapAllowedTargetSelectorChainIds[targetSelectorChainId]) {
+            revert NotAuthorized(target, bytes4(data), chainId);
+        }
+    }
+
+```
+
+#### Optimized Code
+
+```solidity
+
+function _verifyData(address target, bytes memory data, uint256 chainId) internal {
+    require(data.length >= 4, "Data too short");
+
+    // Combine target, selector, and chainId into one key using bit manipulation
+    uint256 targetSelectorChainId = (uint256(uint160(target)) | (uint256(bytes4(data)) << 160) | (chainId << 192));
+
+    // Check the authorized combination
+    if (!mapAllowedTargetSelectorChainIds[targetSelectorChainId]) {
+        revert NotAuthorized(target, bytes4(data), chainId);
+    }
+}
+
+```
+
+
+#### Explanation of the Optimization
+
+``Combined Bitwise Operations``:
+The original code performs separate bitwise operations and assignments to compute targetSelectorChainId. In the optimized version, these operations are combined into a single expression. This reduces the number of assignment operations and makes the code more concise.
+
+Data Length Check:
+Added a require statement to ensure that the data array is at least 4 bytes long. This is necessary because the code assumes data contains at least 4 bytes (to extract bytes4(data)). Without this check, the code could potentially revert due to an out-of-bounds access.
+
+##
+
+## [G-10] Don't Cache state variables only used once 
+
+```diff
+FILE: Treasury.sol
+
+// Increase the amount of LP token reserves
+-        uint256 reserves = mapTokenReserves[token] + tokenAmount;
+-        mapTokenReserves[token] = reserves;
++        mapTokenReserves[token] = mapTokenReserves[token] + tokenAmount;
+
+```
+
+##
+
+## [G-11] Cache _timeLaunch + ONE_YEAR computation to optimize gas 
+
+We can cache the repeated computation of ``_timeLaunch + ONE_YEAR`` to avoid calculating it multiple times. 
+
+```diff
+FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
+
+ // Time launch of the OLAS contract
+        uint256 _timeLaunch = IOLAS(_olas).timeLaunch();
+        // Check that the tokenomics contract is initialized no later than one year after the OLAS token is deployed
++      uint  timeLaunchPlusOneYear = _timeLaunch + ONE_YEAR ; 
+-        if (block.timestamp >= (_timeLaunch + ONE_YEAR)) {
++        if (block.timestamp >= timeLaunchPlusOneYear ) {
+-            revert Overflow(_timeLaunch + ONE_YEAR, block.timestamp);
++            revert Overflow(timeLaunchPlusOneYear , block.timestamp);              
+        }
+        // Seconds left in the deployment year for the zero year inflation schedule
+        // This value is necessary since it is different from a precise one year time, as the OLAS contract started earlier
+-        uint256 zeroYearSecondsLeft = uint32(_timeLaunch + ONE_YEAR - block.timestamp);
++        uint256 zeroYearSecondsLeft = uint32(timeLaunchPlusOneYear - block.timestamp);
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L318-L325
+
+##
+
+## [G-12] 
+
+
+
+
+
 
 
 
