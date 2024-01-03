@@ -141,4 +141,20 @@ lead to an `Out of Gas (OOG)` exception if the `accounts` array becomes excessiv
 > To mitigate this issue, it is recommended to add a check in the `setDonatorsStatuses()` 
 functions to ensure that the length of the `accounts` array does not exceed a certain limit. This limit should be set to a reasonable value to prevent the array from becoming excessively
 long. If the length of the `accounts` array exceeds this limit, the function should `revert` with
-an appropriate error message. This will prevent potential `Out of Gas (OOG)` 
+an appropriate error message. This will prevent potential `Out of Gas (OOG)`
+
+
+# [09] Precision Loss When Dividing Odd Integers by Two
+
+#### Description:
+The contract has a flaw where it may lose precision when dividing `odd integers` by `two`. This
+is because in Solidity, `integer division is floor division`, meaning that the result of the division operation will be the `largest integer less than or equal to the exact result`. Therefore,
+when an `odd integer` is divided by `two`, the result will be `rounded down`, leading to a `loss of
+precision`.
+
+#### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/governance%2Fcontracts%2FveOLAS.sol#L565
+
+#### Recommendation:
+When dividing an amount by `two`, consider taking the first amount as the division result by
+two, and the second one to be the total amount minus the first one.
