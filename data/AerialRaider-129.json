@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Security checks in the calculatePayoutOLAS function of the GenericBondCalculator contract are designed to mitigate potential attacks related to the manipulation of tokenAmount and priceLP parameters",
+  "issueId": 129,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/129"
+}
