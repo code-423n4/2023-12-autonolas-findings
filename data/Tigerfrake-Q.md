@@ -126,3 +126,19 @@ modifier onlyOwner() {
 }
 ```
 
+# [08] Potential Out of Gas Exception Due to Long `accounts` Array
+
+#### Description:
+The contract has an issue in its `setDonatorsStatuses()` function where it does not
+limit the length of the `accounts` array when it is initialized. 
+This could potentially
+lead to an `Out of Gas (OOG)` exception if the `accounts` array becomes excessively long. Therefore, a `Denial of Service` for all the functionalities of the protocol.
+
+#### Instances:
+- https://github.com/code-423n4/2023-12-autonolas/blob/main/tokenomics%2Fcontracts%2FDonatorBlacklist.sol#L56-L77
+
+#### Recommendation:
+> To mitigate this issue, it is recommended to add a check in the `setDonatorsStatuses()` 
+functions to ensure that the length of the `accounts` array does not exceed a certain limit. This limit should be set to a reasonable value to prevent the array from becoming excessively
+long. If the length of the `accounts` array exceeds this limit, the function should `revert` with
+an appropriate error message. This will prevent potential `Out of Gas (OOG)` 
