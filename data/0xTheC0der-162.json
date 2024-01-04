@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xTheC0der",
+  "risk": "2",
+  "title": "Governance can be perpetually bypassed by the multisig since guard can be removed once its paused",
+  "issueId": 162,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/162"
+}
