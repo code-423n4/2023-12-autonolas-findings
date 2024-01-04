@@ -55,6 +55,35 @@ https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af6708
 
 ##
 
+## [G-14] ``nextEpochLen`` , ``nextVeOLASThreshold`` storage variables should be cached 
+
+```diff
+FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
+
+ // Update epoch length and set the next value back to zero
++        uint32 nextEpochLen_ = nextEpochLen ;
+-            if (nextEpochLen > 0) {
++            if (nextEpochLen_ > 0) {
+-                curEpochLen = nextEpochLen;
+-                epochLen = uint32(curEpochLen);
++                epochLen = uint32(nextEpochLen_);
+                nextEpochLen = 0;
+            }
+
+            // Update veOLAS threshold and set the next value back to zero
++       uint96 nextVeOLASThreshold_ = nextVeOLASThreshold ;
+-            if (nextVeOLASThreshold > 0) {
++            if (nextVeOLASThreshold_ > 0) {
+-                veOLASThreshold = nextVeOLASThreshold;
++                veOLASThreshold = nextVeOLASThreshold_;
+                nextVeOLASThreshold = 0;
+            }
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L987-L999
+
+##
+
 ## [G-5] ``lastPointNumber - 1`` subtraction can be unchecked 
 
 Using unchecked for lastPointNumber - 1 is a good optimization to reduce gas costs. Since already checked that lastPointNumber > 0, the subtraction will not underflow.
@@ -73,41 +102,7 @@ uint256 lastPointNumber = mapUserPoints[account].length;
 ```
 https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/veOLAS.sol#L148
 
-##
 
-## [G-7] Don't cache external calls only used once 
-
-```diff
-FILE: 2023-12-autonolas/governance/contracts/veOLAS.sol
-
- function getUserPoint(address account, uint256 idx) public view returns (PointVoting memory uPoint) {
-        // Get the number of user points
--        uint256 userNumPoints = IVEOLAS(ve).getNumUserPoints(account);
--        if (userNumPoints > 0) {
-+        if (IVEOLAS(ve).getNumUserPoints(account) > 0) {
-            uPoint = IVEOLAS(ve).getUserPoint(account, idx);
-        }
-    }
-
-
-```
-https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L193-L199
-
-##
-
-## [G-8] Use assembly for back to back external calls 
-
-Using inline assembly in Solidity for back-to-back external calls can indeed optimize gas usage, particularly by reducing the overhead associated with these calls.
-
-```solidity
-FILE: 2023-12-autonolas/governance/contracts/wveOLAS.sol
-
- // Get the total number of supply points
-        uint256 numPoints = IVEOLAS(ve).totalNumPoints();
-        PointVoting memory sPoint = IVEOLAS(ve).mapSupplyPoints(numPoints);
-
-```
-https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L264-L266
 
 ##
 
@@ -162,19 +157,6 @@ The original code performs separate bitwise operations and assignments to comput
 Data Length Check:
 Added a require statement to ensure that the data array is at least 4 bytes long. This is necessary because the code assumes data contains at least 4 bytes (to extract bytes4(data)). Without this check, the code could potentially revert due to an out-of-bounds access.
 
-##
-
-## [G-10] Don't Cache state variables only used once 
-
-```diff
-FILE: Treasury.sol
-
-// Increase the amount of LP token reserves
--        uint256 reserves = mapTokenReserves[token] + tokenAmount;
--        mapTokenReserves[token] = reserves;
-+        mapTokenReserves[token] = mapTokenReserves[token] + tokenAmount;
-
-```
 
 ##
 
@@ -201,6 +183,8 @@ FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
 
 ```
 https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L318-L325
+
+
 
 ##
 
@@ -249,34 +233,23 @@ FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
 ```
 https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L535-L540
 
+
+
 ##
 
-## [G-14] ``nextEpochLen`` , ``nextVeOLASThreshold`` storage variables should be cached 
+##
+
+## [G-10] Don't Cache state variables only used once 
 
 ```diff
-FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
+FILE: Treasury.sol
 
- // Update epoch length and set the next value back to zero
-+        uint32 nextEpochLen_ = nextEpochLen ;
--            if (nextEpochLen > 0) {
-+            if (nextEpochLen_ > 0) {
--                curEpochLen = nextEpochLen;
--                epochLen = uint32(curEpochLen);
-+                epochLen = uint32(nextEpochLen_);
-                nextEpochLen = 0;
-            }
-
-            // Update veOLAS threshold and set the next value back to zero
-+       uint96 nextVeOLASThreshold_ = nextVeOLASThreshold ;
--            if (nextVeOLASThreshold > 0) {
-+            if (nextVeOLASThreshold_ > 0) {
--                veOLASThreshold = nextVeOLASThreshold;
-+                veOLASThreshold = nextVeOLASThreshold_;
-                nextVeOLASThreshold = 0;
-            }
+// Increase the amount of LP token reserves
+-        uint256 reserves = mapTokenReserves[token] + tokenAmount;
+-        mapTokenReserves[token] = reserves;
++        mapTokenReserves[token] = mapTokenReserves[token] + tokenAmount;
 
 ```
-https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L987-L999
 
 ## [G-2] ``owner`` storage variable should be cached with stack variable 
 
@@ -395,7 +368,45 @@ FILE: 2023-12-autonolas/tokenomics/contracts/Tokenomics.sol
 ```
 https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L856-L858
 
+##
 
+## [G-7] Don't cache external calls only used once 
+
+```diff
+FILE: 2023-12-autonolas/governance/contracts/veOLAS.sol
+
+ function getUserPoint(address account, uint256 idx) public view returns (PointVoting memory uPoint) {
+        // Get the number of user points
+-        uint256 userNumPoints = IVEOLAS(ve).getNumUserPoints(account);
+-        if (userNumPoints > 0) {
++        if (IVEOLAS(ve).getNumUserPoints(account) > 0) {
+            uPoint = IVEOLAS(ve).getUserPoint(account, idx);
+        }
+    }
+
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L193-L199
+
+##
+
+## [G-8] Use assembly for back to back external calls 
+
+Using inline assembly in Solidity for back-to-back external calls can indeed optimize gas usage, particularly by reducing the overhead associated with these calls.
+
+```solidity
+FILE: 2023-12-autonolas/governance/contracts/wveOLAS.sol
+
+ // Get the total number of supply points
+        uint256 numPoints = IVEOLAS(ve).totalNumPoints();
+        PointVoting memory sPoint = IVEOLAS(ve).mapSupplyPoints(numPoints);
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L264-L266
+
+##
+
+##
 
 
 
