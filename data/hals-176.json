@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`Tokenomics` contract: changing `depository` address can reduce the supply caps of the new depository products",
+  "issueId": 176,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/176"
+}
