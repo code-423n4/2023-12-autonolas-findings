@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "AerialRaider",
+  "risk": "2",
+  "title": "Security checks for the validation to ensure that each address for contracts IDonatorBlacklist, IErrorsTokenomics, IOLAS, IServiceRegistry, IToken, ITreasury, IVotingEscrow for the Tokenomics contract",
+  "issueId": 191,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/191"
+}
