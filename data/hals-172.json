@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`Depository.deposit` function : users can create bonds even if the LP token is disabled by the `Treasury`",
+  "issueId": 172,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/172"
+}
