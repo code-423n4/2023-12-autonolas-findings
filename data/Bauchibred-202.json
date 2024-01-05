@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": "Possibility of cancelling a proposal by front-running the creation of a proposal due to an outdated OZ version",
+  "issueId": 202,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/202"
+}
