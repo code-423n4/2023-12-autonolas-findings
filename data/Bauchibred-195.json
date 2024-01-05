@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": "Protocol uses direct transfers and as such might not be able to integrate with some tokens",
+  "issueId": 195,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/195"
+}
