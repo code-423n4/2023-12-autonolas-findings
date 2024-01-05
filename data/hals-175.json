@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`Tokenomics` contract: changing registries addresses will result in service owners not being able to claim their rewards nor receiving donations",
+  "issueId": 175,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/175"
+}
