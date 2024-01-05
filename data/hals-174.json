@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`Tresury` contract: disabling LP tokens can be prevented by a malicious user",
+  "issueId": 174,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/174"
+}
