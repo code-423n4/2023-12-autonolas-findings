@@ -3,7 +3,9 @@
 * L-2: Inconsistent `OLAS` supply cap
 * L-3: Treasury conservation law can be broken via `selfdestruct`
 * L-4: Donator blacklisting is ineffective and can be circumvented
+* L-5: Users can be DoS'ed on `Depository.deposit(...)` by front-runner
 * NC-1: `Treasury.drainServiceSlashedFunds()` can leave dust behind in `ServiceRegistry`
+* NC-2: Add implementation of `GuardCM.checkAfterExecution(...)`
 
 ## L-1: Front-running of `setFxChildTunnel`/`setFxRootTunnel` after deployment
 
@@ -82,7 +84,17 @@ if (incentiveFlags[2] || incentiveFlags[3]) {
 Here, the top-up eligibility is determined based on the votes of the service owner **or** donator.  
 Therefore, the blacklisting **is only effective if** the service owner does not have enough votes **and** the alternative donator (to circumvent blacklist) does not have enough votes either.
 
+## L-5: Users can be DoS'ed on `Depository.deposit(...)` by front-runner
+**Anyone** can front-run a user's [Depository.deposit(uint256 productId, uint256 tokenAmount)](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L279-L346) transaction.  
+However, this is especially a problem whem the user desires a **full deposit** where `tokenAmount` is chosen such that the whole `product.supply` is used. In this case, the attacker can front-run the transaction with a miniscule `tokenAmount` in order to cause DoS for the user via a [ProductSupplyLow](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L322-L325) error.
+
 ## NC-1: `Treasury.drainServiceSlashedFunds()` can leave dust behind in `ServiceRegistry`
 Since the [drainServiceSlashedFunds()](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Treasury.sol#L466-L483) method enforces the `minAcceptedETH` limit before draining funds from the `ServiceRegistry`. There can be occasions where small amounts (`< minAcceptedETH`) are left behind in the `ServiceRegistry` without any possibility to withdraw them.  
 
 Recommendation: Do not enforce `minAcceptedETH` when draining slashed funds.
+
+## NC-2: Add implementation of `GuardCM.checkAfterExecution(...)`
+
+The implementation of the [GuardCM.checkAfterExecution(...)](https://github.com/code-423n4/2023-12-autonolas/blob/ddcf4dbd8ad9b2daa87e190280deb4d41ac9d647/governance/contracts/multisigs/GuardCM.sol#L571-L572) method, which is the counterpart to `GuardCM.checkTransaction(...)`, is empty.  
+There might be settings within the protocol that should not be changed via a `multisig` call. Thus, it is recommended to check for such invariants after the call within that method and revert if necessary.
+
