@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`Tokenomics.trackServiceDonations` function: donors can harm service units owners if they donated small amounts",
+  "issueId": 177,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/177"
+}
