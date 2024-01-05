@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "BugzyVonBuggernaut",
+  "risk": "3",
+  "title": "Permanent DOS of Lockbox withdrawals due to \"0\" amount liquidity positions",
+  "issueId": 181,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/181"
+}
