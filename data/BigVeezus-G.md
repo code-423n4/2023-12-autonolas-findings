@@ -62,4 +62,14 @@ This code can be further re-written to save gas by initializing the variables fr
 
 starting with uint8, strings and then the address.
 
+# Properly use required statement to save gas.
+
+##  Dispenser.sol: line 71 & 76
+Function: ChangeMangers
+
+ChangeManagers function could be properly written by checking tokenomics and treasury for zero address before changing the address to prevent one of the variables from being a zero address
+And putting a require statement helps saves gas if condition is not met. i.e (gasLimit - gasConsumed) will be sent back to tx.origin
+
+Function: ChangeMangers
+
 
