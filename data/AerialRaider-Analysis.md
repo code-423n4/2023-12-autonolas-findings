@@ -13,5 +13,8 @@ Rationale Behind the Changes
 3. Accurate Resource Management: The refund mechanism in the close function ensures that the Depository accurately manages its financial resources, reflecting the true state of bond supplies and obligations.
 
 
+Tokenomics contract:
+Also to ensure the Tokenomics contract effectively fosters the development of valuable code and grows the capital within the protocol, I have suggested several security checks and safeguards. The Tokenomics contract incentivizes both developers and liquidity providers, it aims to create a sustainable and robust ecosystem that can support a wide range of services and applications, especially in the context of DeFi. The contract's functionality indicates a comprehensive approach to managing the protocol's economy and ensuring its long-term viability.
+
 ### Time spent:
 30 hours
