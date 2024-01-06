@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ABAIKUNANBAEV",
+  "risk": "2",
+  "title": "The user may block disabling token by always depositing small token amounts",
+  "issueId": 220,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/220"
+}
