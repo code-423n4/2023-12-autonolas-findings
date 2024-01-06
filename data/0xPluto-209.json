@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xPluto",
+  "risk": "2",
+  "title": "block_slope, dSlope in _checkpoint() may be uninitialized ",
+  "issueId": 209,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/209"
+}
