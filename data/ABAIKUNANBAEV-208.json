@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ABAIKUNANBAEV",
+  "risk": "2",
+  "title": "new owners are not updated in `Tokenomics` when the owner of `unitId` changes",
+  "issueId": 208,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/208"
+}
