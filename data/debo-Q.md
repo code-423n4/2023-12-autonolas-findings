@@ -1,5 +1,5 @@
 # Title
-[L-01] Potential use of "block.number" as source of randonmness
+# [L-01] Potential use of "block.number" as source of randonmness
 # Impact
 The environment variable "block.number" looks like it might be used as a source of randomness. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
 # Location
@@ -130,3 +130,79 @@ The vulnerable functions of checkpoint are depicted below.
 ```
 # Remediation
 Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+# [L-02] Constant/View/Pure functions
+# Impact
+Functions can be declared view in which case they promise not to modify the state.
+If the compiler’s EVM target is Byzantium or newer (default) the opcode STATICCALL is used when view functions are called, which enforces the state to stay unmodified as part of the EVM execution. For library view functions DELEGATECALL is used, because there is no combined DELEGATECALL and STATICCALL. This means library view functions do not have run-time checks that prevent state modifications. This should not impact security negatively because library code is usually known at compile-time and the static checker performs compile-time checks.
+
+The following statements are considered modifying the state:
+
+Writing to state variables.
+
+Emitting events.
+
+Creating other contracts.
+
+Using selfdestruct.
+
+Sending Ether via calls.
+
+Calling any function not marked view or pure.
+
+Using low-level calls.
+
+Using inline assembly that contains certain opcodes.
+
+Pure Functions
+Functions can be declared pure in which case they promise not to read from or modify the state. In particular, it should be possible to evaluate a pure function at compile-time given only its inputs and msg.data, but without any knowledge of the current blockchain state. This means that reading from immutable variables can be a non-pure operation.
+
+In addition to the list of state modifying statements explained above, the following are considered reading from the state:
+
+Reading from state variables.
+
+Accessing address(this).balance or <address>.balance.
+
+Accessing any of the members of block, tx, msg (with the exception of msg.sig and msg.data).
+
+Calling any function not marked pure.
+
+Using inline assembly that contains certain opcodes.
+
+Pure functions are able to use the revert() and require() functions to revert potential state changes when an error occurs.
+
+Reverting a state change is not considered a “state modification”, as only changes to the state made previously in code that did not have the view or pure restriction are reverted and that code has the option to catch the revert and not pass it on.
+
+This behavior is also in line with the STATICCALL opcode.
+
+# POC
+The locations of the vulnerable functions are as follows.
+
+GenericRegistry.tokenByIndex(uint256) : Is constant but potentially should not be.
+Pos: 97:4:
+
+GenericRegistry.tokenURI(uint256) : Is constant but potentially should not be.
+Pos: 135:4:
+
+UnitRegistry._checkDependencies(uint32[],uint32) : Potentially should be constant/view/pure but is not.
+Pos: 42:4:
+
+UnitRegistry._calculateSubComponents(enum UnitRegistry.UnitType,uint32[]) : Is constant but potentially should not be.
+Pos: 200:4
+
+GnosisSafeMultisig._parseData(bytes) : Is constant but potentially should not be.
+more
+Pos: 45:4
+
+Depository.getProducts(bool) : Is constant but potentially should not be.
+more
+Pos: 396:4
+
+Depository.getBonds(address,bool) : Is constant but potentially should not be.
+more
+Pos: 435:4
+
+FxBaseChildTunnel._processMessageFromRoot(uint256,address,bytes) : Potentially should be constant/view/pure but is not. Note: Modifiers are currently not considered by this static analysis.
+Pos: 63:4.
+
+# Remediation
+It is not possible to prevent functions from reading the state at the level of the EVM, it is only possible to prevent them from writing to the state (i.e. only view can be enforced at the EVM level, pure can not).
