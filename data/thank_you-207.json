@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "thank_you",
+  "risk": "2",
+  "title": "Function selector clashing can bypass allowed target selector chain id check",
+  "issueId": 207,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/207"
+}
