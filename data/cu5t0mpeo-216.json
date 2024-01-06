@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "cu5t0mpeo",
+  "risk": "3",
+  "title": "Treasury contract does not support rebase token and fee on transfer token",
+  "issueId": 216,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/216"
+}
