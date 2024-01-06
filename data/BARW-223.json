@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "If the `epochLen` in `Tokenomics.sol` is set to 1 year it will not be possible to create a new checkpoint and ETH donations will be stuck",
+  "issueId": 223,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/223"
+}
