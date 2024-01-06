@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "thank_you",
+  "risk": "2",
+  "title": "LiquidityLockbox does not set slippage amounts when calling whirlpool.decreaseLiquidity",
+  "issueId": 206,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/206"
+}
