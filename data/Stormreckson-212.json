@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Stormreckson",
+  "risk": "2",
+  "title": "Disabling a token that is still used in a productId will cause DOS ",
+  "issueId": 212,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/212"
+}
