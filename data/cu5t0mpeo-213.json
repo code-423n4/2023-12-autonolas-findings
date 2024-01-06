@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "cu5t0mpeo",
+  "risk": "2",
+  "title": "drainServiceSlashedFunds does not check whether the current state is Pause",
+  "issueId": 213,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/213"
+}
