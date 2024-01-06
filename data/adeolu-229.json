@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "slippage risk for users when withdrawing via withdraw() in liquidity_lockbox.sol",
+  "issueId": 229,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/229"
+}
