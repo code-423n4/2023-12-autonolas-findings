@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Malicious user can front-run other users and block them from deposits and locks",
+  "issueId": 271,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/271"
+}
