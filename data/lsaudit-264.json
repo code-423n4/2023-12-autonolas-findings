@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Tokens which does not return booloean on transfer will get stuck in the contract",
+  "issueId": 264,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/264"
+}
