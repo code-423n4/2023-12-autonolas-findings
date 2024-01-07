@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "`bondCounter` is prone to DoS",
+  "issueId": 270,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/270"
+}
