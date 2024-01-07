@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "Community multisig(CM) might maliciously cancel active governance scheduled proposals, due to insufficient checks in GuardCM.sol",
+  "issueId": 283,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/283"
+}
