@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "sil3th",
+  "risk": "2",
+  "title": "NatSpec Comment Discrepancy in `depositTo` Function",
+  "issueId": 274,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/274"
+}
