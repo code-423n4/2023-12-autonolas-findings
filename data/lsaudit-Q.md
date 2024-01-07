@@ -567,3 +567,21 @@ However, function `changeManagers()` is implemented in other files too, and thos
     /// #if_succeeds {:msg "dispenser changed"} _dispenser != address(0) ==> dispenser == _dispenser;
 ```
 
+# [22] Use proper GitHub links when referencing them in the comments
+
+[File: GenericBondCalculator.sol](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/GenericBondCalculator.sol#L88)
+```
+// Inspired by: https://github.com/curvefi/curve-contract/blob/master/contracts/pool-templates/base/SwapTemplateBase.vy#L262
+```
+
+Function `getCurrentPriceLP()` refers to the `SwapTemplateBase` from `curvefi`. However, the comment contains the link to the current GitHub code: `/blob/master`.
+
+When the referenced code in `SwapTemplateBase.vy` will significantly change - the link from the `GenericBondCalculator.sol` comment will point to the newest/updated version, instead of the commit which the `GenericBondCalculator.sol` author had in mind.
+
+Use `blob/commit` instead of `/blob/master` while referencing GitHub codes, e.g.:
+
+```
+// Inspired by: https://github.com/curvefi/curve-contract/blob/b0bbf77f8f93c9c5f4e415bce9cd71f0cdee960e/contracts/pool-templates/base/SwapTemplateBase.vy#L262
+```
+
+Now, even when the `SwapTemplateBase.vy` will be updated/changed in the future - the reference will still point out to the code/line which `GenericBondCalculator.sol`'s had in mind.
