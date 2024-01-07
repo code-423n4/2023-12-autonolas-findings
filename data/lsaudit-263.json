@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Rewards distrubution is not correctly set",
+  "issueId": 263,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/263"
+}
