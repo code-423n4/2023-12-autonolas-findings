@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "iberry",
+  "risk": "2",
+  "title": "decreaseAllowance exsit overflow at OLAS contract",
+  "issueId": 233,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/233"
+}
