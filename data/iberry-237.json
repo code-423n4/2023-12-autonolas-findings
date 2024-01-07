@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "iberry",
+  "risk": "3",
+  "title": "Clearing Mappings when delete mapUserBonds[bondIds[i]] at redeem function in Depository.sol",
+  "issueId": 237,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/237"
+}
