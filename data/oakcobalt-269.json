@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "oakcobalt",
+  "risk": "3",
+  "title": "In Tokenomics.sol, the initial maxBond will be set incorrectly and cause over inflation, due to epochLen is set irrespective of zeroYearSecondsLeft",
+  "issueId": 269,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/269"
+}
