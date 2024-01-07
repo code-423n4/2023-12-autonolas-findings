@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "It's possible to update the component / agent hash - even, when the contract is paused",
+  "issueId": 262,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/262"
+}
