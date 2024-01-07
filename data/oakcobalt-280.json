@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "oakcobalt",
+  "risk": "3",
+  "title": "In Tokenomics.sol, donated Eth will be double spent for component and agent incentives, causing other component/agent owners losing rewards",
+  "issueId": 280,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/280"
+}
