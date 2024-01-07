@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xPluto",
+  "risk": "3",
+  "title": "Token price oracle manipulation in GenericBondCalculator.sol getCurrentPriceLP( ) function",
+  "issueId": 242,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/242"
+}
