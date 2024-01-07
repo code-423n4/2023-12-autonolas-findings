@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xmuxyz",
+  "risk": "2",
+  "title": "A malicious actor can prevent the owner (of the Depository contract) from creating a bond product with a reasonable `priceLP` by executing a price manipulation for the `priceLP` with front-running ",
+  "issueId": 234,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/234"
+}
