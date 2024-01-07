@@ -489,3 +489,81 @@ The link creation syntax is invalid. File points to `Treasury.sol]` instead of `
 | [tokenomics/contracts/Treasury.sol](https://github.com/code-423n4/2023-12-autonolas/blob/main/tokenomics/contracts/Treasury.sol)
 ```
 
+# [21] Functions `changeManager()` and `changeRegistries()` do not have descriptive NatSpec
+
+Function `changeManagers()`  sets the particular address depending on the `address(0)` value. E.g. if we want to set only Tokenomics - we need to set other paremater (`_treasury`) to `address(0)`. This behavior is described in the `changeManager()` NatSpec in `Depository.sol`
+
+E.g.: 
+[File: Depository.sol](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L138)
+```
+/// @dev Changes various managing contract addresses.
+    /// @param _tokenomics Tokenomics address.
+    /// @param _treasury Treasury address.
+    /// #if_succeeds {:msg "tokenomics changed"} _tokenomics != address(0) ==> tokenomics == _tokenomics;
+    /// #if_succeeds {:msg "treasury changed"} _treasury != address(0) ==> treasury == _treasury;
+    function changeManagers(address _tokenomics, address _treasury) external {
+```
+
+Describes only that Tokenomics will be changed when `_tokenomics != address(0)` and that Treasury will be changed when `_treasury != address(0)`. 
+
+However, function `changeManagers()` is implemented in other files too, and those files miss that `#if_succeeds` lines in the NatSpec comments.
+
+[File: Dispenser.sol](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Dispenser.sol#L61)
+```
+    /// @dev Changes various managing contract addresses.
+    /// @param _tokenomics Tokenomics address.
+    /// @param _treasury Treasury address.
+    function changeManagers(address _tokenomics, address _treasury) external {
+```
+
+`changeManagers()` from `Dispenser.sol` misses proper NatSpec, it should contain - the similar info as `changeManagers()` in `Depository.sol`:
+
+```
+    /// #if_succeeds {:msg "tokenomics changed"} _tokenomics != address(0) ==> tokenomics == _tokenomics;
+    /// #if_succeeds {:msg "treasury changed"} _treasury != address(0) ==> treasury == _treasury;
+```
+
+[File: Tokenomics.sol](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L419)
+
+`changeManagers()` from `Tokenomics.sol` misses proper NatSpec, it should contain info about `Treasury`, `Depository` and `Dispenser` parameters:
+
+```
+    /// #if_succeeds {:msg "treasury changed"} _treasury != address(0) ==> treasury == _treasury;
+    /// #if_succeeds {:msg "depository changed"} _depository != address(0) ==> depository == _depository;
+    /// #if_succeeds {:msg "dispenser changed"} _dispenser != address(0) ==> dispenser == _dispenser;
+```
+
+[File: Tokenomics.sol](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L446)
+```
+    /// @dev Changes registries contract addresses.
+    /// @param _componentRegistry Component registry address.
+    /// @param _agentRegistry Agent registry address.
+    /// @param _serviceRegistry Service registry address.
+    function changeRegistries(address _componentRegistry, address _agentRegistry, address _serviceRegistry) external {
+```
+
+`changeRegistries()` from `Tokenomics.sol` misses proper NatSpec, it should contain info about component, agent and service registries:
+
+```
+/// #if_succeeds {:msg "component registry changed"} _componentRegistry != address(0) ==> componentRegistry == _componentRegistry;
+/// #if_succeeds {:msg "agent registry changed"} _agentRegistry != address(0) ==> agentRegistry == _agentRegistry;
+/// #if_succeeds {:msg "service registry changed"} _serviceRegistry != address(0) ==> serviceRegistry == _serviceRegistry;
+```
+
+[File: Treasury.sol](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Treasury.sol#L152)
+```
+    /// @dev Changes various managing contract addresses.
+    /// @param _tokenomics Tokenomics address.
+    /// @param _depository Depository address.
+    /// @param _dispenser Dispenser address.
+    function changeManagers(address _tokenomics, address _depository, address _dispenser) external {
+```
+
+`changeManagers()` from `Treasury.sol` misses proper NatSpec, it should contain info about Tokenomics, Depository and Dispenser:
+
+```
+    /// #if_succeeds {:msg "treasury changed"} _treasury != address(0) ==> treasury == _treasury;
+    /// #if_succeeds {:msg "depository changed"} _depository != address(0) ==> depository == _depository;
+    /// #if_succeeds {:msg "dispenser changed"} _dispenser != address(0) ==> dispenser == _dispenser;
+```
+
