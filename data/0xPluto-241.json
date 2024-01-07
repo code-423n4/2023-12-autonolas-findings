@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xPluto",
+  "risk": "2",
+  "title": "Signature Malleability in OLAS.sol permit( ) function (inherited from Solmate ERC20)",
+  "issueId": 241,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/241"
+}
