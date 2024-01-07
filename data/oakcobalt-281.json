@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "In liquidity_lockbox.sol, withdraw liquidity is vulnerable to front run due to disabled slippage protection",
+  "issueId": 281,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/281"
+}
