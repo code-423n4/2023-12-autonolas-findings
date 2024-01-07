@@ -55,3 +55,10 @@ https://github.com/code-423n4/2023-12-autonolas/blob/main/governance/contracts/v
 https://github.com/code-423n4/2023-12-autonolas/blob/main/governance/contracts/veOLAS.sol#L433
 https://github.com/code-423n4/2023-12-autonolas/blob/main/governance/contracts/veOLAS.sol#L487
 https://github.com/code-423n4/2023-12-autonolas/blob/main/governance/contracts/veOLAS.sol#L692
+
+---
+
+### Missing duplicate array check
+###### Github lines:
+https://github.com/code-423n4/2023-12-autonolas/blob/main/registries/contracts/multisigs/GnosisSafeMultisig.sol#L92
+https://github.com/code-423n4/2023-12-autonolas/blob/main/registries/contracts/multisigs/GnosisSafeSameAddressMultisig.sol#L86
