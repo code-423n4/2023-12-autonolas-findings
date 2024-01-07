@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "peanuts",
+  "risk": "2",
+  "title": "drainServiceSlashedFunds() should not check for minAcceptedETH when slashing funds",
+  "issueId": 247,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/247"
+}
