@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "israeladelaja",
+  "risk": "2",
+  "title": "When the totalSupply of AgentRegistry or ComponentRegistry is max uint256, ``GenericRegistry.exists()` function reverts",
+  "issueId": 286,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/286"
+}
