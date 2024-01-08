@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xTheC0der",
+  "risk": "2",
+  "title": "HomeMediator.processMessageFromForeign(...) is vulnerable to replay attacks",
+  "issueId": 284,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/284"
+}
