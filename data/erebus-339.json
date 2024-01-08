@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "erebus",
+  "risk": "3",
+  "title": "Missing slippage protection in `liquidity_lockbox::withdraw`",
+  "issueId": 339,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/339"
+}
