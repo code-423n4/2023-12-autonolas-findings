@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "aycozynfada",
+  "risk": "2",
+  "title": "The Treasury.sol contract changes the address for the different manager contract in one function call.",
+  "issueId": 417,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/417"
+}
