@@ -231,3 +231,21 @@ As seen above, `getBridgeMediatorChainId()` will directly fetch chainId and brid
 
 **Recommendation:**
 Consider simplify code in `_verifySchedule()` into `(address bridgeMediatorL2, uint256 bridgeMediatorL2ChainId)=getBridgeMediatorChainId(targets[i])`.
+
+### Low-08: Incorrect comments in FxERC20RootTunnel.sol
+In FxERC20RootTunnel.sol `_withdraw()`, there is an incorrect comment for `@dev`. The comment says `Withdraws bridged tokens from L1 to get their original tokens on L1 by a specified address`. This is incorrect and misleading because `_withdraw()` is intended to burn tokens on L1 and get original tokens on L2. 
+
+```solidity
+//contracts/bridges/FxERC20RootTunnel.sol
+    //@audit incorrect comment - Withdraws bridged tokens from L1 to get their original tokens on L2.
+|>  /// @dev Withdraws bridged tokens from L1 to get their original tokens on L1 by a specified address.
+    /// @notice Reentrancy is not possible as tokens are verified before the contract deployment.
+    /// @param to Destination address on L2.
+    /// @param amount Token amount to be withdrawn.
+    function _withdraw(address to, uint256 amount) internal {
+...
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/bridges/FxERC20RootTunnel.sol#L82)
+
+**Recommendation:**
+Change the comments into `Withdraws bridged tokens from L1 to get their original tokens on L2 by a specified address`.
