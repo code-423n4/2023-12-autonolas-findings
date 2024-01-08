@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "SpicyMeatball",
+  "risk": "2",
+  "title": "User or a group of users can manipulate IDF value by donating to multiple components",
+  "issueId": 381,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/381"
+}
