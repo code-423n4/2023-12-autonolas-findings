@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Udsen",
+  "risk": "3",
+  "title": "L1 TO L2 ERC20 TOKEN TRANSFER CAN BE DoS IN THE `FxERC20ChildTunnel` CONTRACT SINCE A MALICIOUS USER CAN SET THE `fxRootTunnel` ADDRESS TO AN INVALID ADDRESS",
+  "issueId": 404,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/404"
+}
