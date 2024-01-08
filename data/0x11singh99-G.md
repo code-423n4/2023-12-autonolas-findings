@@ -1,3 +1,5 @@
+**Note:**  I've removed all findings instances appearing in the bot and 4naly3er reports and have only kept the ones that they missed.
+
 # Gas-Optimization for Olas Protocol
 
 ## Gas Optimizations
