@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "erebus",
+  "risk": "3",
+  "title": "Withdrawals can be frozen by creating null deposits",
+  "issueId": 341,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/341"
+}
