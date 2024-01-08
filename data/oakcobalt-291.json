@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "Copycat registrations (with same ipfs hash and dependencies) is possible, which may steal rewards from the original (the first) registration owner.",
+  "issueId": 291,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/291"
+}
