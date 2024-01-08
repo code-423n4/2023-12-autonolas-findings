@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "bareli",
+  "risk": "2",
+  "title": "NO access control in decreaseAllowance and increaseAllowance",
+  "issueId": 428,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/428"
+}
