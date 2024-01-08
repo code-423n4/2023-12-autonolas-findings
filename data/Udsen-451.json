@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "MALICIOUS USER CAN `DoS` A NORMAL USER FROM LOCKING THE `OLAS` TOKENS FOR A SHORTER PERIOD OF TIME, TO GET VOTING POWER",
+  "issueId": 451,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/451"
+}
