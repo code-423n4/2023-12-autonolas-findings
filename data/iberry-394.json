@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "iberry",
+  "risk": "3",
+  "title": "Mint function can  exceeds a predefined limitin when flationRemainder function exist overflow at OLAS.sol contract ",
+  "issueId": 394,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/394"
+}
