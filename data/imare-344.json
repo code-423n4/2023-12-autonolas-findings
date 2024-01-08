@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "imare",
+  "risk": "2",
+  "title": "GenericRegistry#tokenURI breaks eip-721 standard",
+  "issueId": 344,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/344"
+}
