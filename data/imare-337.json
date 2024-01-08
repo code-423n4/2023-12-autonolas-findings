@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "imare",
+  "risk": "2",
+  "title": "'IServiceRegistry' defines methods that the real ServiceRegistry does not implement",
+  "issueId": 337,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/337"
+}
