@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "deepplus",
+  "risk": "2",
+  "title": "Initial effective bond can exceed expected amount during first epoch since there is no checking that `_epochLen` is not bigger than `zeroYearSecondsLeft`",
+  "issueId": 296,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/296"
+}
