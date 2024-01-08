@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Missing checks for failed calls to the token program will corrupt user's positions",
+  "issueId": 350,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/350"
+}
