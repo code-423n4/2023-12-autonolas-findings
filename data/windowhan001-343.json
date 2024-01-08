@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "windowhan001",
+  "risk": "2",
+  "title": "DoS Vulnerability Due to Lack of Permission Checks in Polygon fx-portal Tunnel Configuration",
+  "issueId": 343,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/343"
+}
