@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "In `FxERC20RootTunnel`, there is no option to get bridged tokens back in case the transaction can not be executed on L2 ",
+  "issueId": 435,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/435"
+}
