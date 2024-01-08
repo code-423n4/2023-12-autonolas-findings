@@ -403,3 +403,64 @@ function getProducts(
     }
 }
 ```
+### Low-11: Tokenomics doesn't perform compatibility checks during upgrade which violates EIP-1822 (UUPS) pattern and also doesn't implement proxiable function to indicate compatibility
+
+TokenomicsProxy.sol follows EIP-1822 standards as exemplified in code doc `Proxy implementation is created based on the Universal Upgradeable Proxy Standard (UUPS) EIP-1822`.
+
+EIP-1822 requires upgrade logic be implemented in the implementation contract (Tokenomics.sol). Specifically, it's required that during the upgrade call, compatibility of the new implementation contract needs to be checked in the upgrade function. And also, it's required that the implementation contract has a `proxiable()` function to indicate support of EIP-1822 standards.
+
+The vulnerability is (1) Tokenomics.sol doesn't check for compatibility for the new implementation in the upgrade function (`changeTokenomicsImplementation()`), (2) neither does current Tokenomics.sol implement a `proxiable()` function to indicate compatibility.
+
+According EIP-1822(see [here](https://eips.ethereum.org/EIPS/eip-1822)), a sample implementation that satisfies the two requirements above looks like this.
+```solidity
+//https://eips.ethereum.org/EIPS/eip-1822
+contract Proxiable {
+    // Code position in storage is keccak256("PROXIABLE") = "0xc5f16f0fcc639fa48a6947836d9850f504798523bf8c9a3a87d5876cf622bcf7"
+
+    function updateCodeAddress(address newAddress) internal {
+        require(
+            bytes32(0xc5f16f0fcc639fa48a6947836d9850f504798523bf8c9a3a87d5876cf622bcf7) == Proxiable(newAddress).proxiableUUID(),
+            "Not compatible"
+        );
+        assembly { // solium-disable-line
+            sstore(0xc5f16f0fcc639fa48a6947836d9850f504798523bf8c9a3a87d5876cf622bcf7, newAddress)
+        }
+    }
+    function proxiableUUID() public pure returns (bytes32) {
+        return 0xc5f16f0fcc639fa48a6947836d9850f504798523bf8c9a3a87d5876cf622bcf7;
+    }
+}
+``` 
+However, current Tokenomcis.sol's upgrade implementation will only check for address(0), then directly assign the new address to storage without requiring `bytes32(0xc5f16f0fcc639fa48a6947836d9850f504798523bf8c9a3a87d5876cf622bcf7) == Proxiable(newAddress).proxiableUUID(), "Not compatible"`, as required by standard.
+This exposes the risk of the new implementation might not be upgradable or compatible, causing the Tokenmocis upgrade mechanism be permanently disabled.
+
+```solidity
+//contracts/Tokenomics.sol
+  function changeTokenomicsImplementation(address implementation) external {
+    // Check for the contract ownership
+    if (msg.sender != owner) {
+      revert OwnerOnly(msg.sender, owner);
+    }
+
+    // Check for the zero address
+    if (implementation == address(0)) {
+      revert ZeroAddress();
+    }
+
+    // Store the implementation address under the designated storage slot
+    //@audit an incompatible implementation might be directly written in storage, disabling upgrade mechanism for the future
+    assembly {
+|>    sstore(PROXY_TOKENOMICS, implementation)
+    }
+    emit TokenomicsImplementationUpdated(implementation);
+  }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L397)
+
+**Recommendation:**
+Check for compatibility before overwriting implementation address and follow EIP-1822.
+
+
+
+
+
