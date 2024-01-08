@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "jasonxiale",
+  "risk": "2",
+  "title": "User might lose unclaimed incentives after `Dispenser.changeManagers` is called",
+  "issueId": 329,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/329"
+}
