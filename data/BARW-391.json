@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "Time delay for operations scheduled by the community multisig (CM) in `timelock` pose a risk to the protocol and it users ",
+  "issueId": 391,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/391"
+}
