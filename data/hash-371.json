@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hash",
+  "risk": "2",
+  "title": "EpochLengths close to 1 year will cause the protocol to be stuck",
+  "issueId": 371,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/371"
+}
