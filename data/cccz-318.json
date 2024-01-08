@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "The too-short VotingDelay results in the first depositor being able to pass any proposal",
+  "issueId": 318,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/318"
+}
