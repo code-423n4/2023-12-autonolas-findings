@@ -18,7 +18,7 @@ The Autonolas protocol consists of three main parts: governance, registries, and
 
 - Testing and Simulations: Even though the project implements several tests, upon reviewing the codebase, several crucial functions don’t. Conduct thorough testing of all contracts and functions and simulations to understand how they will behave under various market conditions. This can help anticipate potential issues.
 
-Monitoring Recommendations: While audits help in identifying code-level issues in the current implementation and potentially the code deployed in production, the Olas protocol team is encouraged to consider incorporating monitoring activities in the production environment. Ongoing monitoring of deployed contracts helps identify potential threats and issues affecting production environments. Intending to provide a complete security assessment, the monitoring recommendations section raises several actions addressing trust assumptions and out-of-scope components that can benefit from on-chain monitoring.
+- Monitoring Recommendations: While audits help in identifying code-level issues in the current implementation and potentially the code deployed in production, the Olas protocol team is encouraged to consider incorporating monitoring activities in the production environment. Ongoing monitoring of deployed contracts helps identify potential threats and issues affecting production environments. Intending to provide a complete security assessment, the monitoring recommendations section raises several actions addressing trust assumptions and out-of-scope components that can benefit from on-chain monitoring.
 
 - Design Choice: The separation of functionalities (governance, registries, tokenomics) into individual contracts seems to be a good design choice. It isolates functionalities and makes the codebase cleaner and easier to manage.
 
@@ -61,13 +61,13 @@ The overall quality of the codebase for Olas can be classified as ”Good“.
 
 Here’s a breakdown of the key parts of this contract: 
 
-
+![Governance](https://github.com/jauvany/jauvany/assets/16118635/a80b5e0a-f243-442b-b889-1d79fdff7aaa)
 
 > The Depository.sol contract is the Smart contract handling the logic for the creation and closure of bonding programs, and the deposits and redeems bonds
 
 Here’s a breakdown of the key parts of this contract:
 
-
+![Depository](https://github.com/jauvany/jauvany/assets/16118635/ebb54178-79fc-4746-991a-344817c663ab)
 
 # Centralization risks
  
@@ -90,6 +90,8 @@ External Contract Dependencies: The protocol relies on Openzepplin, solmate, whi
 
 **Conclusion**
  The Olas ecosystem is well-designed and innovative, offering a wide range of features and capabilities. However, there are areas where improvements could be made, particularly in terms of gas efficiency, and potential exploitation of certain modules. By addressing these issues, the Olas ecosystem could become even more secure, efficient, and reliable.
+
+
 
 
 ### Time spent:
