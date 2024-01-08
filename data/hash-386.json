@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hash",
+  "risk": "3",
+  "title": "Wrong invocation of Whirpools's updateFeesAndRewards will cause it to always revert",
+  "issueId": 386,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/386"
+}
