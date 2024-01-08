@@ -4,6 +4,7 @@
 * L-3: Treasury conservation law can be broken via `selfdestruct`
 * L-4: Donator blacklisting is ineffective and can be circumvented
 * L-5: Users can be DoS'ed on `Depository.deposit(...)` by front-runner
+* L-6: OLAS minting via treasury is not guaranteed
 * NC-1: `Treasury.drainServiceSlashedFunds()` can leave dust behind in `ServiceRegistry`
 * NC-2: Add implementation of `GuardCM.checkAfterExecution(...)`
 
@@ -87,6 +88,30 @@ Therefore, the blacklisting **is only effective if** the service owner does not 
 ## L-5: Users can be DoS'ed on `Depository.deposit(...)` by front-runner
 **Anyone** can front-run a user's [Depository.deposit(uint256 productId, uint256 tokenAmount)](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L279-L346) transaction.  
 However, this is especially a problem whem the user desires a **full deposit** where `tokenAmount` is chosen such that the whole `product.supply` is used. In this case, the attacker can front-run the transaction with a miniscule `tokenAmount` in order to cause DoS for the user via a [ProductSupplyLow](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L322-L325) error.
+
+## L-6: `OLAS` minting via treasury is not guaranteed
+
+1. The [OLAS.mint(...)](https://github.com/code-423n4/2023-12-autonolas/blob/ddcf4dbd8ad9b2daa87e190280deb4d41ac9d647/governance/contracts/OLAS.sol#L75-L85) method does **not** revert if the requested amount cannot be limited due to the inflation limit:
+
+```solidity
+    function mint(address account, uint256 amount) external {
+        // Access control
+        if (msg.sender != minter) {
+            revert ManagerOnly(msg.sender, minter);
+        }
+
+        // Check the inflation schedule and mint
+        if (inflationControl(amount)) {
+            _mint(account, amount);
+        }
+    }
+```
+
+2. The treasury itself correctly accounts for the OLAS inflation limit and thereby guarantees the minting of the the requested `OLAS` amount [here](https://github.com/code-423n4/2023-12-autonolas/blob/ddcf4dbd8ad9b2daa87e190280deb4d41ac9d647/tokenomics/contracts/Treasury.sol#L240-L242) and [here](https://github.com/code-423n4/2023-12-autonolas/blob/ddcf4dbd8ad9b2daa87e190280deb4d41ac9d647/tokenomics/contracts/Treasury.sol#L414-L416).
+3. However, the `minter` of `OLAS` can be changed via [changeMinter(address newMinter)](https://github.com/code-423n4/2023-12-autonolas/blob/ddcf4dbd8ad9b2daa87e190280deb4d41ac9d647/governance/contracts/OLAS.sol#L58-L69) by the `owner`.
+4. Then, the new `minter` can mint `OLAS` up to the inflation limit.
+5. Next, the minter is changed back to the treasury contract.
+6. Now, the minting via treasury (see references in step 2) will fail to mint enough `OLAS` **without** any error.
 
 ## NC-1: `Treasury.drainServiceSlashedFunds()` can leave dust behind in `ServiceRegistry`
 Since the [drainServiceSlashedFunds()](https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Treasury.sol#L466-L483) method enforces the `minAcceptedETH` limit before draining funds from the `ServiceRegistry`. There can be occasions where small amounts (`< minAcceptedETH`) are left behind in the `ServiceRegistry` without any possibility to withdraw them.  
