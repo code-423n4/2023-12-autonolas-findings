@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ak1",
+  "risk": "2",
+  "title": "Depository.sol#L291 : Lack of slippage protection when deposit tokens in exchange for a bond from a specified product",
+  "issueId": 407,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/407"
+}
