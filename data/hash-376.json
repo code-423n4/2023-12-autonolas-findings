@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hash",
+  "risk": "2",
+  "title": "Solana Lockbox LP token fees can be stolen by an attacker",
+  "issueId": 376,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/376"
+}
