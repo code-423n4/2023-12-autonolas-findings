@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "EV_om",
+  "risk": "2",
+  "title": "Withdraw amount returned by `getLiquidityAmountsAndPositions` may be incorrect",
+  "issueId": 452,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/452"
+}
