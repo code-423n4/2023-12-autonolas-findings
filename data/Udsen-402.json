@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Udsen",
+  "risk": "3",
+  "title": "TRANSACTION EXECUTION IS `DoS` IN THE CROSS-CHAIN GOVERNANCE CONTRACTS AND IN THE GNOSIS SAFE COMMUNITY MULTISIG TRANSACTION CHECKS SINCE THE WRONG `payload` IS EXTRACTED FROM THE `data` BYTES ARRAY",
+  "issueId": 402,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/402"
+}
