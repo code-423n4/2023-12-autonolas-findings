@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE EXECUTION OF THE GOVERNANCE ACTIONS (CONTINOUS TRANSACTIONS PACKED TOGETHER) ON GNOSIS CHAIN COULD `DoS`, IF A SINGLE MALICIOUS `target` CONTRACT REVERTS THE TRANSACTION",
+  "issueId": 421,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/421"
+}
