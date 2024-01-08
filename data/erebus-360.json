@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Wrong assignement leads to the last position amount in `positionAmounts` being corrupted",
+  "issueId": 360,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/360"
+}
