@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "lil_eth",
+  "risk": "2",
+  "title": "if more than one year pass since last `checkpoint()`  call, tokenomics contract should be paused/blocked",
+  "issueId": 305,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/305"
+}
