@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "BARW",
+  "risk": "2",
+  "title": "Changing the `quorumNumerator` should not be only possible by the governance",
+  "issueId": 423,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/423"
+}
