@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "windowhan001",
+  "risk": "3",
+  "title": "Miscalculation of OLAS Amount Due to Inaccurate LP Token Price in Specific Bonding Mechanism Scenarios",
+  "issueId": 368,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/368"
+}
