@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ravikiranweb3",
+  "risk": "2",
+  "title": "Treasury::withdraw() function can be used by the owner to drain all the tokens",
+  "issueId": 327,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/327"
+}
