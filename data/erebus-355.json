@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Wrong divisor in `calculatePayoutOLAS` makes `totalTokenValue` be `1e18` times higher than it should",
+  "issueId": 355,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/355"
+}
