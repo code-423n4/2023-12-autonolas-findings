@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ravikiranweb3",
+  "risk": "2",
+  "title": "GuardCM::checkTransaction() cannot differentiate between successful validation and when the contract is paused.",
+  "issueId": 325,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/325"
+}
