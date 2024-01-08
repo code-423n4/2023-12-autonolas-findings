@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "EV_om",
+  "risk": "2",
+  "title": "Potential inaccurate calculation of `maxBond` and `effectiveBond` in case of delayed call to `checkpoint()`",
+  "issueId": 447,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/447"
+}
