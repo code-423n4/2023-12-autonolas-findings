@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "peritoflores",
+  "risk": "2",
+  "title": "[M1] LastDonationBlockNumber should be updated at the beginning of the function to prevent from reentracy attack",
+  "issueId": 429,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/429"
+}
