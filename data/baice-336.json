@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "baice",
+  "risk": "2",
+  "title": "Multiple solidity versions in one project, may cause compatibility and security issues",
+  "issueId": 336,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/336"
+}
