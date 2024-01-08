@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hash",
+  "risk": "2",
+  "title": "User's / protocol would be unable to withdraw intended amounts from Solana lockbox",
+  "issueId": 382,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/382"
+}
