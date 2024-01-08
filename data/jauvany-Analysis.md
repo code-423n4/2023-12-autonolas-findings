@@ -63,11 +63,15 @@ Here’s a breakdown of the key parts of this contract:
 
 ![Governance](https://github.com/jauvany/jauvany/assets/16118635/a80b5e0a-f243-442b-b889-1d79fdff7aaa)
 
+![Governance](https://docs.google.com/drawings/d/13Jby6zTyvHet1rUE-3dSB1-xc5gnHk0qfpPnaXDnWaY/edit?usp=sharing)
+
 > The Depository.sol contract is the Smart contract handling the logic for the creation and closure of bonding programs, and the deposits and redeems bonds
 
 Here’s a breakdown of the key parts of this contract:
 
 ![Depository](https://github.com/jauvany/jauvany/assets/16118635/ebb54178-79fc-4746-991a-344817c663ab)
+
+![Depository](https://docs.google.com/drawings/d/1C7W3u6hAMafZotSr_Hm56_8UU6-T5qajYn_saXxzI9g/edit?usp=sharing)
 
 # Centralization risks
  
@@ -90,6 +94,8 @@ External Contract Dependencies: The protocol relies on Openzepplin, solmate, whi
 
 **Conclusion**
  The Olas ecosystem is well-designed and innovative, offering a wide range of features and capabilities. However, there are areas where improvements could be made, particularly in terms of gas efficiency, and potential exploitation of certain modules. By addressing these issues, the Olas ecosystem could become even more secure, efficient, and reliable.
+
+
 
 
 
