@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "jasonxiale",
+  "risk": "2",
+  "title": "`tokenURI` does not comply with ERC721 - Metadata specification",
+  "issueId": 331,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/331"
+}
