@@ -268,7 +268,32 @@ event MultisigCreated(address indexed multisig, address[] owners, uint256 thresh
 
 ##
 
-## [L-6] 
+## [L-6] Potential precision lose in checkpoint() function
+
+Function: checkpoint()
+
+```solidity
+FILE: 2023-12-autonolas/tokenomics/contracts
+/Tokenomics.sol
+
+ // Bonding and top-ups in OLAS are recalculated based on the inflation schedule per epoch
+        // Actual maxBond of the epoch
+        tp.epochPoint.totalTopUpsOLAS = uint96(inflationPerEpoch);
+        incentives[4] = (inflationPerEpoch * tp.epochPoint.maxBondFraction) / 100;
+
+
+```
+https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Tokenomics.sol#L951
+
+### Explanation:
+The calculation of inflationPerEpoch multiplies curInflationPerSecond (a uint96 value) by the difference in seconds (diffNumSeconds), which is likely a large number.
+The result is then used in a percentage-based calculation for incentives[4].
+The division by 100 can lead to precision loss since Solidity does not support floating-point arithmetic.
+
+
+
+
+
 
 
 
