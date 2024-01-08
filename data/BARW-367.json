@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "When unpausing the `GuardCM`, not setting `governorCheckProposalId` to 0 puts the assets of the protocol at risk",
+  "issueId": 367,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/367"
+}
