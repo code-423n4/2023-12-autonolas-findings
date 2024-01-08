@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "hash",
+  "risk": "2",
+  "title": "Admin may be able to bypass the Gnosis cross chain governance authorization in future",
+  "issueId": 378,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/378"
+}
