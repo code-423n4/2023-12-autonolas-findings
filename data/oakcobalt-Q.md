@@ -249,3 +249,157 @@ In FxERC20RootTunnel.sol `_withdraw()`, there is an incorrect comment for `@dev`
 
 **Recommendation:**
 Change the comments into `Withdraws bridged tokens from L1 to get their original tokens on L2 by a specified address`.
+
+### Low-09: `tokenByIndex()` in GenericRegistry.sol returns incorrect `unitId`
+In GenericRegistry.sol, `tokenByIndex()` will add 1 to input token `id`. This is incorrect, because token `id` would have already be incremented by 1 before `safeMint()` in UnitRegistry.sol. This means token `id` should equal `unitId`. 
+
+In UnitRegistry.sol `create()` we can see that when creating a unit token id and uintId will be the same. `uintId` will be incremented by 1 before calling `_safeMint(uintOwner,uintId);`. So both `uintId` and token id will start from 1.
+
+```solidity
+//contracts/GenericRegistry.sol
+    function tokenByIndex(
+        uint256 id
+    ) external view virtual returns (uint256 unitId) {
+        //@audit incorrect, unitId will equal id, which is ensured in UnitRegistry.sol create()
+ |>     unitId = id + 1;
+        if (unitId > totalSupply) {
+            revert Overflow(unitId, totalSupply);
+        }
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/GenericRegistry.sol#L98)
+
+```solidity
+//contracts/UnitRegistry.sol
+    function create(address unitOwner, bytes32 unitHash, uint32[] memory dependencies)
+        external virtual returns (uint256 unitId)
+    {
+...
+        unitId++;
+        // Initialize the unit and mint its token
+        Unit storage unit = mapUnits[unitId];
+        unit.unitHash = unitHash;
+        unit.dependencies = dependencies;
+...
+|>      _safeMint(unitOwner, unitId);
+...
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/registries/contracts/UnitRegistry.sol#L110)
+
+**Recommendation:**
+Revise `tokenByIndex()` implementation to directly assign `id` to `unitId`.
+
+### Low-10: In Depository, functions can be simplified to reduce the number of for-loops
+In Depository.sol there are (2) functions that currently run unnecessary for-loops and can be simplified to only use one for-loop.
+
+**Instances(2):**
+(1)
+In `getProducts()`, there are two for-loops(numProducts). And the second for-loop can be eliminated by directly pushing the indices into the array `productsIds[]` when the condition is satisfied.
+```solidity
+//contracts/Depository.sol
+    function getProducts(
+        bool active
+    ) external view returns (uint256[] memory productIds) {
+        // Calculate the number of existing products
+        uint256 numProducts = productCounter;
+        bool[] memory positions = new bool[](numProducts);
+        uint256 numSelectedProducts;
+        // Traverse to find requested products
+        //@audit Can be simplified to use only one for-loop, if(){productIds.push(i)}
+        for (uint256 i = 0; i < numProducts; ++i) {
+            // Product is always active if its supply is not zero, and inactive otherwise
+            if (
+                (active && mapBondProducts[i].supply > 0) ||
+                (!active && mapBondProducts[i].supply == 0)
+            ) {
+|>              positions[i] = true;
+                ++numSelectedProducts;
+            }
+        }
+
+        // Form active or inactive products index array
+        productIds = new uint256[](numSelectedProducts);
+        uint256 numPos;
+        //@audit this for-loop can be eliminated
+|>      for (uint256 i = 0; i < numProducts; ++i) {
+            //@audit-info note: when positions[i] = true, it satisfies the search criteria
+            if (positions[i]) {
+                productIds[numPos] = i;
+                ++numPos;
+            }
+        }
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L413)
+
+(2)
+In `getBonds()`, there are two for-loops(numProducts). And the second for-loop can be eliminated by directly pushing the indices into the array `productsIds[]` when the condition is satisfied.
+
+```solidity
+//contracts/Depository.sol
+    function getBonds(
+        address account,
+        bool matured
+    ) external view returns (uint256[] memory bondIds, uint256 payout) {
+        // Check the address
+        if (account == address(0)) {
+            revert ZeroAddress();
+        }
+
+        uint256 numAccountBonds;
+        // Calculate the number of pending bonds
+        uint256 numBonds = bondCounter;
+        bool[] memory positions = new bool[](numBonds);
+        // Record the bond number if it belongs to the account address and was not yet redeemed
+
+        for (uint256 i = 0; i < numBonds; ++i) {
+            // Check if the bond belongs to the account
+            // If not and the address is zero, the bond was redeemed or never existed
+            if (mapUserBonds[i].account == account) {
+                // Check if requested bond is not matured but owned by the account address
+                if (
+                    !matured ||
+                    // Or if the requested bond is matured, i.e., the bond maturity timestamp passed
+                    block.timestamp >= mapUserBonds[i].maturity
+                ) {
+        //@audit Can be simplified to use only one for-loop, if(){if(){bondIds.push()}}
+ |>                 positions[i] = true;
+                    ++numAccountBonds;
+                    // The payout is always bigger than zero if the bond exists
+                    payout += mapUserBonds[i].payout;
+                }
+            }
+        }
+        // Form pending bonds index array
+        bondIds = new uint256[](numAccountBonds);
+        uint256 numPos;
+        //@audit this for-loop can be eliminated
+|>      for (uint256 i = 0; i < numBonds; ++i) {
+            if (positions[i]) {
+                bondIds[numPos] = i;
+                ++numPos;
+            }
+        }
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/tokenomics/contracts/Depository.sol#L468)
+
+**Recommendation:**
+In the first for-loop, when the condition is met directly use `productIds.push(i)`.
+For exmaple:
+```solidity
+function getProducts(
+    bool active
+) external view returns (uint256[] memory productIds) {
+    uint256 numProducts = productCounter;
+    // Use a single loop to filter and push indices directly into productIds
+    for (uint256 i = 0; i < numProducts; ++i) {
+        if (
+            (active && mapBondProducts[i].supply > 0) ||
+            (!active && mapBondProducts[i].supply == 0)
+        ) {
+            productIds.push(i);
+        }
+    }
+}
+```
