@@ -180,3 +180,54 @@ As seen above, `_verifyData()` can directly use `getTargetSelectorChainId()` to 
 
 **Recommendation:**
 Simplify `_verifyData()` to directly use `if(!getTargetSelectorChainId(target, bytes4(data),chainId){`
+
+### Low-07: `_verifySchedule()` can be simplified to user existing helper function `getBridgeMediatorChainId()` and avoid duplicated mechanism code.(Note: Not included in the bot report)
+
+In GuardCM.sol, `_verifySchedule()` contains same mechanism code as existing helper `getBridgeMediatorChainId()` which fetches `chainId` and `bridgeMediatorL2` from L1 mediator address `targets[i]` (address bridgeMediatorL1). 
+
+```solidity
+//contracts/multisigs/GuardCM.sol
+    function _verifySchedule(bytes memory data, bytes4 selector) internal {
+...
+        // Traverse all the schedule targets and selectors extracted from calldatas
+        for (uint i = 0; i < targets.length; ++i) {
+            //@audit bridgeMediatorL2ChainId and bridgeMediatorL2 can be directly fetched using helper function getBridgeMediatorChainId(), which contains the same mechanism code.
+            // Get the bridgeMediatorL2 and L2 chain Id, if any
+|>          uint256 bridgeMediatorL2ChainId = mapBridgeMediatorL1L2ChainIds[targets[i]];
+            // bridgeMediatorL2 occupies first 160 bits
+|>          address bridgeMediatorL2 = address(uint160(bridgeMediatorL2ChainId));
+
+            // Check if the data goes across the bridge
+            if (bridgeMediatorL2 != address(0)) {
+                // Get the chain Id
+                // L2 chain Id occupies next 64 bits
+                uint256 chainId = bridgeMediatorL2ChainId >> 160;
+
+                // Process the bridge logic
+                _processBridgeData(callDatas[i], bridgeMediatorL2, chainId);
+            } else {
+                // Verify the data right away as it is not the bridged one
+                _verifyData(targets[i], callDatas[i], block.chainid);
+            }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/multisigs/GuardCM.sol#L361-L364)
+
+```solidity
+//contracts/multi sigs/GuardCM.sol
+    function getBridgeMediatorChainId(address bridgeMediatorL1) external view
+        returns (address bridgeMediatorL2, uint256 chainId)
+    {
+        // Get the bridgeMediatorL2 and L2 chain Id
+        uint256 bridgeMediatorL2ChainId = mapBridgeMediatorL1L2ChainIds[bridgeMediatorL1];
+        // bridgeMediatorL2 occupies first 160 bits
+        bridgeMediatorL2 = address(uint160(bridgeMediatorL2ChainId));
+        // L2 chain Id occupies next 64 bits
+        chainId = bridgeMediatorL2ChainId >> 160;
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/multisigs/GuardCM.sol#L597-L605)
+
+As seen above, `getBridgeMediatorChainId()` will directly fetch chainId and bridgeMediatorL2 and saves additional line of code in `_verifySchedule()`.
+
+**Recommendation:**
+Consider simplify code in `_verifySchedule()` into `(address bridgeMediatorL2, uint256 bridgeMediatorL2ChainId)=getBridgeMediatorChainId(targets[i])`.
