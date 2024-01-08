@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "aycozynfada",
+  "risk": "2",
+  "title": "Change owner() function can pass in wrong address and authorize malicious user in Treasury.sol",
+  "issueId": 433,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/433"
+}
