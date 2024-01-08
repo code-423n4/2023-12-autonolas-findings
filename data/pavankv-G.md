@@ -75,6 +75,10 @@ After
 | veOLAS   | 3037763  | 3037943  | 3037860  |
 
 
+Code snippet:-
+https://github.com/code-423n4/2023-12-autonolas/blob/main/governance/contracts/veOLAS.sol#L278C1-L293C37
+
+
 
 ## 2. Cache the global mapping in local variable to save the gas 
 
