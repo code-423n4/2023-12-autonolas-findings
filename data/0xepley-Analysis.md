@@ -2,14 +2,13 @@
 ### Summary
 | List |Head |Details|
 |:--|:----------------|:------|
-|a) |The approach I followed when reviewing the code | Stages in my code review and analysis |
+|a) |The approach I would follow when reviewing the code | Stages in my code review and analysis |
 |b) |Analysis of the code base | What is unique? How are the existing patterns used? "Solidity-metrics" was used  |
 |c) |Test analysis | Test scope of the project and quality of tests |
 |d) |Security Approach of the Project | Audit approach of the Project |
 |e) |Other Audit Reports and Automated Findings | What are the previous Audit reports and their analysis |
 |f) |Packages and Dependencies Analysis | Details about the project Packages |
-|g) |Other recommendations | What is unique? How are the existing patterns used? |
-|h) |New insights and learning from this audit | Things learned from the project |
+|g) |New insights and learning from this audit | Things learned from the project |
 
 
 ## a) The approach I followed when reviewing the code
@@ -71,46 +70,8 @@ Uses Consensys Solidity Metrics
 ## Sequence Diagram of Governance Contract
 [![2-1.png](https://i.postimg.cc/g0qMFrsr/2-1.png)](https://postimg.cc/qtqc2J9d)
 
-## c) Test analysis
-### What did the project do differently? ;
--   1) It can be said that the developers of the project did a quality job, there is a test structure consisting of tests with quality content. In particular, tests have been written successfully.
-
--   2) Overall line coverage percentage provided by your tests : 99.56
-
-
-
-
-### What could they have done better?
-
-
--  1) In order to understand the test scenarios and develop more effective test scenarios, the following bob, alice and other roles are can be defined one by one, in this way role definitions increase the quality and readability in tests
-
-```solidity
-
- // Sample labels
-vm.label(bob, 'bob');
-vm.label(alice, 'alice');
-vm.label(DEPLOYER, 'deployer');
-vm.label(USD_OWNER, 'usd owner');
-vm.label(POOL_PROXY, 'lending pool');
-```
-</br>
-
-
--  3) If we look at the test scope and content of the project with a systematic checklist, we can see which parts are good and which areas have room for improvement As a result of my analysis, those marked in green are the ones that the project has fully achieved. The remaining areas are the development areas of the project in terms of testing ;
-
-
-[![test-cases.jpg](https://i.postimg.cc/1zgD5wCt/test-cases.jpg)](https://postimg.cc/v1s40gdF)
-
-Ref:https://xin-xia.github.io/publication/icse194.pdf
-
-[![sdf.png](https://i.postimg.cc/pXZH2Xdh/sdf.png)](https://postimg.cc/nCC52xBp)
-
-
 ## Contract Integration Graph
 [![dfdf.png](https://i.postimg.cc/7ZTBYKHC/dfdf.png)](https://postimg.cc/zy8wxSR5)
-
-
 
 
 
@@ -207,6 +168,38 @@ Ref:https://xin-xia.github.io/publication/icse194.pdf
 |    🛑    | Function can modify state |
 |    💵    | Function is payable |
 
+
+
+
+## c) Test analysis
+### What did the project do differently? ;
+-   1) It can be said that the developers of the project did a quality job, there is a test structure consisting of tests with quality content. In particular, tests have been written successfully.
+
+-   2) Overall line coverage percentage provided by your tests : 99.56
+
+### What could they have done better?
+
+-  1) In order to understand the test scenarios and develop more effective test scenarios, the following bob, alice and other roles are can be defined one by one, in this way role definitions increase the quality and readability in tests
+
+```solidity
+
+ // Sample labels
+vm.label(bob, 'bob');
+vm.label(alice, 'alice');
+vm.label(DEPLOYER, 'deployer');
+vm.label(USD_OWNER, 'usd owner');
+vm.label(POOL_PROXY, 'lending pool');
+```
+
+
+-  3) If we look at the test scope and content of the project with a systematic checklist, we can see which parts are good and which areas have room for improvement As a result of my analysis, those marked in green are the ones that the project has fully achieved. The remaining areas are the development areas of the project in terms of testing ;
+
+
+[![test-cases.jpg](https://i.postimg.cc/1zgD5wCt/test-cases.jpg)](https://postimg.cc/v1s40gdF)
+
+Ref:https://xin-xia.github.io/publication/icse194.pdf
+
+[![sdf.png](https://i.postimg.cc/pXZH2Xdh/sdf.png)](https://postimg.cc/nCC52xBp)
 
 
 
@@ -442,5 +435,24 @@ https://github.com/code-423n4/2023-12-autonolas/blob/main/lockbox-solana/docs/Vu
 | [`openzeppelin`](https://www.npmjs.com/package/@openzeppelin/contracts) | [![npm](https://img.shields.io/npm/v/@openzeppelin/contracts.svg)](https://www.npmjs.com/package/@openzeppelin/contracts) |  Project uses version `4.8.3`; consider updating to `5.0.1` 
 | [`solhint`](https://github.com/protofire/solhint) | [![npm](https://img.shields.io/npm/v/@openzeppelin/contracts.svg)](https://www.npmjs.com/package/@openzeppelin/contracts) |  Project relies on version `3.4.0`; consider upgrading to `4.1.1` 
 
+
+## g) New insights and learning from this audit 
+
+The Autonolas protocol is a comprehensive system divided into three main components: governance, registries, and tokenomics. Each plays a distinct role in the protocol's operation and governance.
+
+1. **Governance**: It's designed with multiple control points to manage the Autonolas protocol effectively. Key components include a governance module, a Timelock, and veOLAS (virtualized claim on OLAS tokens). This structure allows the community to propose, vote on, and implement changes. The governance token, veOLAS, represents locked OLAS tokens and uses a voting system where power is determined by the amount of OLAS locked and the duration of the lock. This system is akin to veCRV in Curve Finance. There's also a community-owned multisig wallet (CM) which can execute some changes, bypassing the usual governance process, but with a guard mechanism for alignment and reversibility.
+
+2. **Cross-Chain Governance**: Due to its multi-chain nature, Autonolas implements cross-chain governance to facilitate actions between Ethereum and L2 networks like Polygon and Gnosis Chain. This is achieved through mechanisms like FxPortal for Polygon and Arbitrary Message Bridge (AMB) for Gnosis Chain. Additionally, contracts facilitate L1-L2 token transfers, particularly for tokens created natively on Polygon and bridged to Ethereum.
+
+3. **Registries**: This feature allows developers to register and manage their off-chain code on-chain using NFTs. The focus is on registering and managing agents and components, representing them uniquely on the blockchain.
+
+4. **Tokenomics**: The system aims to grow useful code and capital proportionally. This includes incentivizing the creation and on-chain registration of agents and components through a donations system. Additionally, it encourages liquidity providers to sell their liquidity pairs to the protocol for OLAS at a discount, enhancing the protocol's liquidity.
+
+5. **Bonding on Different Chains**: The protocol involves moving OLAS tokens across chains using low-trust, secure bridges. Liquidity pools are created on the target chain, and LP tokens are transferred back to Ethereum for bonding. A special mechanism is used for bonding on Solana, involving Orca AMM and a liquidity-lockbox contract to maintain compatibility with the existing depository model.
+
+
+Note: I didn't tracked the time, the time I mentioned is just an estimate
+
+
 ### Time spent:
-40 hours
+6 hours
