@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "peanuts",
+  "risk": "2",
+  "title": "Protocol assumes that LP price is fixed when bonding in Depository.sol",
+  "issueId": 334,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/334"
+}
