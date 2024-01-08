@@ -115,4 +115,68 @@ But when the input `blockNumber` is after the last checkpoint of the account, `_
 **Recommendation:**
 Consider check `blockNumber` with `block.timestamp` and revert when `blockNumber` is greater than `block.timestamp`
 
+### Low-05: Invalid bypass for out-of-bounds condition
+In contracts/wveOLAS.sol, `getUserPoint()` wraps veOLAS.sol's `getUserPoint()` function to handle out-of-bonds condition where an input `idx`(index) is out of bound of user's `PointVoting[]` stored in `mapUserPoints`.
 
+However, the bypass for out-of-bounds condition is invalid. In weOLAS.sol's `getUserPoint()`, first the array length of `PointVoting[]` is queried by calling `uint256 userNumPoints = IVEOLAS(ve).getNumUserPoints(account)`. Then `if (userNumPoints > 0) {` is used to make sure veOLAS.sol's `getUserPoint()` will only be called when `userNumPoints>0` this is an invalid condition. The correct condition to handle out-of-bounds will be `idx<userNumPints` which ensure that if statement body will only be called when `idx` is within bounds.
+
+```solidity
+//contracts/wveOLAS.sol
+    function getUserPoint(address account, uint256 idx) public view returns (PointVoting memory uPoint) {
+        // Get the number of user points
+        uint256 userNumPoints = IVEOLAS(ve).getNumUserPoints(account);
+        //@audit this if condition is invalid, userNumPints>0 doesn't ensure that idx is within bounds. As a result, calling getUserPoint() will still risk out-of-bounds revert errors.
+|>      if (userNumPoints > 0) {
+            uPoint = IVEOLAS(ve).getUserPoint(account, idx);
+        }
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/wveOLAS.sol#L196)
+
+**Recommendation:**
+Change the if condition into `if (idx< userNumPoints)`
+
+
+### Low-06: Some code can be simplified using existing helper functions to avoid writing the same mechanism code multiple times in the same contract. (Note: Not included in the bot report)
+In GuardCM.sol, `_verifyData()` contains some mechanism code which is already defined in helper functions `getTargetSelectorChainId()`. Writing the same mechanism code multiple times in the same contract is error-prone and increase audit time, especially when there are existing helper functions defined that can be used.
+
+```solidity
+//contracts/multisigs/GuardCM.sol
+    function _verifyData(address target, bytes memory data, uint256 chainId) internal {
+        //@audit the below implementation can be replaced by helper getTargetSelectorChainId()
+        // Push a pair of key defining variables into one key
+        // target occupies first 160 bits
+|>      uint256 targetSelectorChainId = uint256(uint160(target));
+        // selector occupies next 32 bits
+|>      targetSelectorChainId |= uint256(uint32(bytes4(data))) << 160;
+        // chainId occupies next 64 bits
+|>      targetSelectorChainId |= chainId << 192;
+        // Check the authorized combination of target and selector
+|>      if (!mapAllowedTargetSelectorChainIds[targetSelectorChainId]) {
+            revert NotAuthorized(target, bytes4(data), chainId);
+        }
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/multisigs/GuardCM.sol#L192-L199)
+```solidity
+//contracts/multisigs/GuardCM.sol
+    function getTargetSelectorChainId(address target, bytes4 selector, uint256 chainId) external view
+        returns (bool status)
+    {
+        // Push a pair of key defining variables into one key
+        // target occupies first 160 bits
+        uint256 targetSelectorChainId = uint256(uint160(target));
+        // selector occupies next 32 bits
+        targetSelectorChainId |= uint256(uint32(selector)) << 160;
+        // chainId occupies next 64 bits
+        targetSelectorChainId |= chainId << 192;
+
+        status = mapAllowedTargetSelectorChainIds[targetSelectorChainId];
+    }
+```
+(https://github.com/code-423n4/2023-12-autonolas/blob/2a095eb1f8359be349d23af67089795fb0be4ed1/governance/contracts/multisigs/GuardCM.sol#L579-L590)
+
+As seen above, `_verifyData()` can directly use `getTargetSelectorChainId()` to get the status. 
+
+**Recommendation:**
+Simplify `_verifyData()` to directly use `if(!getTargetSelectorChainId(target, bytes4(data),chainId){`
