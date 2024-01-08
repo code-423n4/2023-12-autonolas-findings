@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "trachev",
+  "risk": "2",
+  "title": "All pending donations at the last epoch will be lost",
+  "issueId": 307,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/307"
+}
