@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "Treasury owner can drain users' approved tokens by setting malicious depository.",
+  "issueId": 323,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/323"
+}
