@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "israeladelaja",
+  "risk": "2",
+  "title": "You can deposit / increase the locked amount to be bigger than 2^96 - 1 after 220+ years",
+  "issueId": 292,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/292"
+}
