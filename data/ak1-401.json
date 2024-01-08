@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ak1",
+  "risk": "3",
+  "title": "veOLAS.sol : PointVoting's slope and bias values are reset to zero when depositing for another account.",
+  "issueId": 401,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/401"
+}
