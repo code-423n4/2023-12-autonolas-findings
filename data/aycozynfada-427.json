@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "aycozynfada",
+  "risk": "2",
+  "title": "In tokenomics,sol, anyone can become admin and can at the same time alter the values of all input paramaters of the initializeTokenomics() function.",
+  "issueId": 427,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/427"
+}
