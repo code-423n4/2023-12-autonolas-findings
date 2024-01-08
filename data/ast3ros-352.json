@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ast3ros",
+  "risk": "2",
+  "title": "Absence of chain ID verification in HomeMediator contract",
+  "issueId": 352,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/352"
+}
