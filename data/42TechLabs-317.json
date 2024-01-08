@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "42TechLabs",
+  "risk": "2",
+  "title": "constructor function lack input validation routines in GovernorOLAS contract ",
+  "issueId": 317,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/317"
+}
