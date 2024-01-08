@@ -16,7 +16,7 @@ Our recommendation is to align the code how comments stated to maintain the prot
 ```solidity
 // Effective bond must be bigger than the requested amount
         uint256 eBond = effectiveBond;
-        if (eBond >= amount) { //@audit changed here
+        if (eBond > amount) { //@audit changed here
 
 ```
 
