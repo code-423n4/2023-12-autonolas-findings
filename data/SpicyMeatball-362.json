@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "SpicyMeatball",
+  "risk": "3",
+  "title": "Changing one of the registry addresses in the Tokenomics contract may result in the loss of user rewards",
+  "issueId": 362,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/362"
+}
