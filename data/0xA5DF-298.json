@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "0xA5DF",
+  "risk": "2",
+  "title": "IDF is calculated based on the number of new owners rather than unique owners",
+  "issueId": 298,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/298"
+}
