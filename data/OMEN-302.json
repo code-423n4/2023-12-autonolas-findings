@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "OMEN",
+  "risk": "3",
+  "title": "malicious user can pay less than min accepted eth for service for all service ids except the first one",
+  "issueId": 302,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/302"
+}
