@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "OMEN",
+  "risk": "3",
+  "title": "wrong implementation in blanceOfLocked leads to wrong data",
+  "issueId": 285,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/285"
+}
