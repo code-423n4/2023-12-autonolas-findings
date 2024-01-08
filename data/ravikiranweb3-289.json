@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "ravikiranweb3",
+  "risk": "3",
+  "title": "BridgedERC20::mint and burn operates on different accounts.",
+  "issueId": 289,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/289"
+}
