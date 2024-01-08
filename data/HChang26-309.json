@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "HChang26",
+  "risk": "2",
+  "title": "Malicious users can manipulate governance fairness by front-running `createLock()`",
+  "issueId": 309,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/309"
+}
