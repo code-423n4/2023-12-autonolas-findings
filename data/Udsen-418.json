@@ -1,0 +1,8 @@
+{
+  "contest": 315,
+  "handle": "Udsen",
+  "risk": "3",
+  "title": "A MALICIOUS USER CAN FRONT RUN AND EXECUTE THE `Tokenomics.initializeTokenomics` TRANSACTION TO BECOME THE OWNER OF THE `Tokenomics` CONTRACT",
+  "issueId": 418,
+  "issueUrl": "https://github.com/code-423n4/2023-12-autonolas-findings/issues/418"
+}
